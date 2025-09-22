@@ -8,6 +8,7 @@ export function Header() {
         { href: '/about', label: 'About' },
         { href: '/projects', label: 'Projects' },
         { href: '/settings', label: 'Settings' },
+        { href: '/test', label: 'test' },
     ]
     return (
         <header style={{ borderBottom: '1px solid #e5e7eb', padding: 12, marginBottom: 16 }}>
