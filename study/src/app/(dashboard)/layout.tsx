@@ -5,8 +5,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     return (
         <div>
             {/* Double header for dashboard area */}
-            <Header />
-            <Header />
+            <Header isDashboard />
+            <Header isDashboard />
             <main style={{ paddingTop: 12 }}>{children}</main>
         </div>
     )

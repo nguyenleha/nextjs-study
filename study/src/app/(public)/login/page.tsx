@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import type { Route } from 'next'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { apiFetch } from '@/lib/oauth2'
 import { TextInput } from '@/components/ui/TextInput'
 import { Button } from '@/components/ui/Button'
@@ -11,10 +12,10 @@ import { setToken } from '@/lib/constants'
 
 export default function LoginPage() {
     const router = useRouter()
+    const searchParams = useSearchParams()
     const [username, setUsername] = useState('super_admin')
     const [password, setPassword] = useState('Pa12345!@#@')
     const [loading, setLoading] = useState(false)
-
 
     const fetchData = useCallback(async () => {
         // setLoading(true)
@@ -28,16 +29,21 @@ export default function LoginPage() {
                     zone: 'DASHBOARD',
                 }),
             })
-            console.log('res :>> ', res);
+            console.log('res :>> ', res)
 
             setToken(res, 'access_token')
             setToken(res, 'refresh_token')
 
+            // Redirect back to intended page if provided by middleware
+            const rawRedirect = searchParams.get('redirect')
+            const safeRedirect = (rawRedirect && rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/projects') as Route
+            router.replace(safeRedirect)
+            // Optional refresh to ensure server components re-read cookies
             router.refresh()
         } finally {
             // setLoading(false)
         }
-    }, [username, password, router])
+    }, [username, password, router, searchParams])
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()

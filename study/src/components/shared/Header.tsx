@@ -3,7 +3,11 @@ import type { Route } from 'next'
 import { cookies } from 'next/headers'
 import { LogoutButton } from '@/components/ui/LogoutButton'
 
-export async function Header() {
+type HeaderProps = {
+    isDashboard?: boolean
+}
+
+export async function Header({ isDashboard = false }: HeaderProps) {
     const jar = await cookies()
     // const all = jar.getAll()
     const accessToken = jar.get('access_token')?.value ?? null
@@ -36,7 +40,7 @@ export async function Header() {
                         {n.label}
                     </Link>
                 ))}
-                {accessToken && <LogoutButton />}
+                {accessToken && <LogoutButton isDashboard={isDashboard} />}
             </nav>
         </header>
     )
