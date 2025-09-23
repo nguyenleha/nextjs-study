@@ -1,7 +1,10 @@
-import { apiFetch } from '@/lib/api/client'
+'use server'
+
+import { apiFetch } from '@/lib/oauth2'
 import { PrefectureResponse } from '@/types/prefecture'
 import { PageProps } from '@/types/next'
 import { Pagination } from '../ui/Pagination'
+import { cookies } from 'next/headers'
 
 type Props = PageProps & { basePath: string }
 
@@ -17,15 +20,17 @@ export default async function PrefectureSSR({ searchParams, basePath }: Props) {
     const pageSize = Number.isFinite(perPage) && perPage > 0 ? perPage : 8
 
     // SSR: fetch prefecture on the server and render immediately
-    const prefecture = await apiFetch<PrefectureResponse>('/prefecture/search', {
-        cache: 'no-store',
-        method: 'POST',
-        body: JSON.stringify({
-            page: currentPage,
-            perPage: pageSize,
-        }),
-    })
-
+    // const prefecture = await apiFetch<PrefectureResponse>('/prefecture/search', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         page: currentPage,
+    //         perPage: pageSize,
+    //     }),
+    // })
+    // const prefecture = await apiFetch<PrefectureResponse>('/system/health', {
+    //     method: 'GET',
+    // })
+    // console.log('prefecture :>> ', prefecture)
     return (
         <>
             <table border={1} cellSpacing={0} cellPadding={8} style={{ marginTop: 12 }}>
@@ -37,18 +42,16 @@ export default async function PrefectureSSR({ searchParams, basePath }: Props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {prefecture.data.list.map((u) => (
+                    {/* {prefecture.data.list.map((u) => (
                         <tr key={u.id}>
                             <td>{u.id}</td>
                             <td>{u.name}</td>
                             <td>{u.alphabet}</td>
                         </tr>
-                    ))}
+                    ))} */}
                 </tbody>
             </table>
-            <div style={{ marginTop: 16 }}>
-                <Pagination currentPage={prefecture.meta.current_page} totalPages={prefecture.meta.last_page} pageSize={pageSize} basePath={basePath} />
-            </div>
+            <div style={{ marginTop: 16 }}>{/* <Pagination currentPage={prefecture.meta.current_page} totalPages={prefecture.meta.last_page} pageSize={pageSize} basePath={basePath} /> */}</div>
         </>
     )
 }

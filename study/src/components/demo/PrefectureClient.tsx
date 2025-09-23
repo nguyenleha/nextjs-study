@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/ui/Button'
 import { useCallback, useEffect, useState } from 'react'
-import { apiFetch } from '@/lib/api/client'
+import { apiFetch } from '@/lib/oauth2'
 import { Prefecture, PrefectureResponse } from '@/types/prefecture'
 import { ClientPagination } from '@/components/ui/ClientPagination'
 
@@ -16,17 +16,25 @@ export default function PrefectureClient() {
         async (p: number) => {
             // setLoading(true)
             try {
-                const res = await apiFetch<PrefectureResponse>('/prefecture/search', {
-                    cache: 'no-store',
-                    method: 'POST',
-                    body: JSON.stringify({
-                        page: p,
-                        perPage,
-                    }),
+                // const res = await apiFetch<PrefectureResponse>('/prefecture/search', {
+                //     method: 'POST',
+                //     body: JSON.stringify({
+                //         page: p,
+                //         perPage,
+                //     }),
+                // })
+                // setItems(res.data.list)
+                // setTotalPages(res.meta.last_page)
+
+                const prefecture = await apiFetch<PrefectureResponse>('/system/dashboard/getStats', {
+                    method: 'GET',
                 })
-                setItems(res.data.list)
-                setTotalPages(res.meta.last_page)
-            } finally {
+                console.log('prefecture :>> ', prefecture)
+            } 
+            catch (error) {
+                console.error('Failed to fetch data:', error)
+            }
+            finally {
                 // setLoading(false)
             }
         },

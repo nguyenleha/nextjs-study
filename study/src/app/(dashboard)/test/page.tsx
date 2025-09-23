@@ -4,7 +4,7 @@ import PrefectureSSR from '@/components/demo/PrefectureSSR'
 
 export const dynamic = 'force-dynamic'
 
-export default async function ProjectsPage({ searchParams }: PageProps) {
+export default async function TestPage({ searchParams }: PageProps) {
     const basePath = '/test' as string
 
     return (
