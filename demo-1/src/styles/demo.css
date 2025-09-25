@@ -1,0 +1,10 @@
+/* Demo global styles for study */
+:root {
+    --brand: #111827;
+}
+
+.demo-box {
+    border: 1px dashed #e5e7eb;
+    padding: 8px;
+    border-radius: 6px;
+}
