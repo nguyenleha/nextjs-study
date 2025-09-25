@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Header } from '../../components/shared/Header'
+import { Header } from '@/components/shared/Header'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     return (

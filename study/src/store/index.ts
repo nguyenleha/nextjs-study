@@ -1,32 +1,13 @@
-// Minimal in-memory store to avoid external deps.
-export interface AppState {
-    count: number
-}
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './counterSlice'
+import todoReducer from './todoSlice'
 
-type Listener = (state: AppState) => void
+export const store = configureStore({
+    reducer: {
+        counter: counterReducer,
+        todo: todoReducer, // Thêm reducer mới
+    },
+})
 
-const state: AppState = { count: 0 }
-const listeners: Set<Listener> = new Set()
-
-export function getState(): AppState {
-    return { ...state }
-}
-
-export function subscribe(listener: Listener) {
-    listeners.add(listener)
-    return () => listeners.delete(listener)
-}
-
-function notify() {
-    for (const l of listeners) l(getState())
-}
-
-export function inc() {
-    state.count += 1
-    notify()
-}
-
-export function dec() {
-    state.count -= 1
-    notify()
-}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

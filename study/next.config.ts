@@ -33,10 +33,13 @@ const nextConfig: NextConfig = {
         formats: ['image/avif', 'image/webp'],
     },
 
+    // Typed routes (moved from experimental in Next.js 15)
+    typedRoutes: true,
+
     // Trust proxy headers when behind Nginx for correct URL generation
-    experimental: {
-        typedRoutes: true,
-    },
+    // experimental: {
+    //     // Removed: typedRoutes moved to main config
+    // },
 
     // Apply basic security headers to all routes
     async headers() {

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
+import { StoreProvider } from '../store/StoreProvider'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -24,7 +26,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                {/* Load external dependencies */}
+                <Script src="https://code.jquery.com/jquery-3.6.0.min.js" strategy="beforeInteractive" />
+                <Script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" strategy="beforeInteractive" />
+
+                {/* Load custom scripts */}
+                <Script src="/js/common.js" strategy="afterInteractive" />
+                <Script src="/js/slick-config.js" strategy="afterInteractive" />
+
+                <StoreProvider>{children}</StoreProvider>
+            </body>
         </html>
     )
 }
