@@ -1,13 +1,5 @@
 export type RequestOptions = RequestInit & { baseUrl?: string } & { language?: string }
 
-export interface TokenResponse {
-    token_type: string
-    expires_in: number
-    access_token: string
-    refresh_token: string
-    remember_me?: boolean
-}
-
 export interface RequestJson {
     json?: Array<object>
     join?: object
@@ -65,4 +57,14 @@ export interface LinkMetaMessage {
         total: number
     }
     message?: string
+}
+export interface TokenResponse extends LinkMetaMessage {
+    token_type: string
+    expires_in: number
+    access_token: string
+    refresh_token: string
+    remember_me?: boolean
+    errors: {
+        username: string[]
+    }
 }

@@ -1,11 +1,11 @@
 import { RequestOptions, TokenResponse } from '@/types/common'
 import { clearToken, getCookieValue, removeCookieValue, setToken } from '@/utils/ApiUtils'
-import { AppConfig } from '@/utils/AppConfig';
+import { AppConfig } from '@/utils/AppConfig'
 
 // Base API configuration
 const API_BASE_URL = AppConfig.NEXT_PUBLIC_API_URL || ''
 
-export default class ApiService {
+class ApiService {
     private baseURL: string
 
     constructor(baseURL: string = API_BASE_URL) {
@@ -51,10 +51,13 @@ export default class ApiService {
                             console.error('API request failed:', error)
                             throw error
                         })
+                } else {
+                    await clearToken()
                 }
-            } else {
-                // Không có refresh_token: dọn token và yêu cầu đăng nhập lại.
-                await clearToken()
+            }
+
+            if (res.status === 422) {
+                throw await res.json()
             }
 
             if (!res.ok) {
@@ -69,7 +72,7 @@ export default class ApiService {
     }
 
     // GET method
-    async get<T>(endpoint: string, data: unknown): Promise<T> {
+    async get<T>(endpoint: string, data?: unknown): Promise<T> {
         let url = endpoint
         if (data && typeof data === 'object' && Object.keys(data).length > 0) {
             const stringifiedData: Record<string, string> = {}
@@ -103,3 +106,6 @@ export default class ApiService {
         return this.request<T>(endpoint, { method: 'DELETE' })
     }
 }
+
+const apiService = new ApiService()
+export default apiService
