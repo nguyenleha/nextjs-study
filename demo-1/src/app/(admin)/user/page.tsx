@@ -18,6 +18,9 @@ import { setQuery } from '@/store/slice/common'
 import { UserSearch } from '@/components/layout/user/Search'
 import { fetchRoles } from '@/api/system/privilege'
 import { setRolesRedux } from '@/store/slice/auth'
+import { Button } from '@/components/ui/Button'
+import Image from 'next/image'
+import closeIcon from '@/assets/images/common/close_icon.svg'
 
 export default function UserListPage() {
     const router = useRouter()
@@ -382,6 +385,17 @@ export default function UserListPage() {
                     {totalArticle > 1 && <Pagination pending={pending} totalArticle={totalArticle} currentPage={currentPage} modelValue={changePage} />}
                 </>
             )}
+
+            <div className="common_sp">
+                {!pendingAll && (
+                    <div id="SearchWrap" className="common_search_wrap">
+                        <Button className="common_search_close_btn" onClick={SearchCloseBtnSP}>
+                            <Image src={closeIcon} alt="close" />
+                        </Button>
+                        <UserSearch type="sp" roles={authStore.roles} pending={pending} search={search}></UserSearch>
+                    </div>
+                )}
+            </div>
         </>
     )
 }
