@@ -1250,3 +1250,8 @@ tr.confirmed_approved td input:checked+.checked_box_disable {
     width: 100%;
   }
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  padding: 0px 8px !important;
+  height: 100%;
+}

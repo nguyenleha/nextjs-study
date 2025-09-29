@@ -6,6 +6,7 @@ export type SelectOption = {
 }
 
 export type SelectProps = {
+    id?: string
     name?: string
     value?: string | number | string[]
     options: SelectOption[]
@@ -14,9 +15,9 @@ export type SelectProps = {
     disabled?: boolean
 }
 
-export function Select({ name, value, options, onChange, className = '', disabled = false }: SelectProps) {
+export function Select({ id, name, value, options, onChange, className = '', disabled = false }: SelectProps) {
     return (
-        <select name={name} value={value} onChange={onChange} className={className} disabled={disabled}>
+        <select id={id} name={name} value={value} onChange={onChange} className={className} disabled={disabled}>
             {options.map((opt) => (
                 <option key={opt.value} value={opt.value}>
                     {opt.label}

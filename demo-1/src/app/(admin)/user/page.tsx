@@ -1,7 +1,7 @@
 'use client'
 
 import { FormSearch, JoinOrderBy, OrderBy, Query, WhereCondition } from '@/types/common'
-import { Roles } from '@/types/system/auth'
+// import { Roles } from '@/types/system/auth'
 import { User } from '@/types/userManagement'
 import { useCallback, useEffect, useState, useMemo } from 'react'
 // import $ from 'jquery'
@@ -13,15 +13,17 @@ import { Loading } from '@/components/shared/Loading'
 import Link from 'next/link'
 import { Pagination } from '@/components/shared/Pagination'
 import { TableTh } from '@/components/ui/TableTh'
-import { useAppDispatch } from '@/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setQuery } from '@/store/slice/common'
-import { UserSearch } from '@/components/layout/user/search'
+import { UserSearch } from '@/components/layout/user/Search'
+import { fetchRoles } from '@/api/system/privilege'
+import { setRolesRedux } from '@/store/slice/auth'
 
 export default function UserListPage() {
     const router = useRouter()
-
     const searchParams = useSearchParams()
     const queryObj = useMemo(() => getQuery(searchParams), [searchParams])
+    const authStore = useAppSelector((state) => state.auth)
     const dispatch = useAppDispatch()
 
     /**
@@ -32,7 +34,7 @@ export default function UserListPage() {
     const [currentPage, setCurrentPage] = useState<number>(Number(new URLSearchParams(window.location.search).get('currentPage')) || 1)
     const [totalArticle, setTotalArticle] = useState<number>(1)
     const [user, setUser] = useState<User>({ data: [] })
-    const [roles, setRoles] = useState<Roles>({ data: { count: 0, role_list: [] } })
+    // const [roles, setRoles] = useState<Roles>({ data: { count: 0, role_list: [] } })
     const [pending, setPending] = useState<boolean>(false)
     const [pendingSort, setPendingSort] = useState<boolean>(true)
     const [pendingAll, setPendingAll] = useState<boolean>(true)
@@ -151,8 +153,16 @@ export default function UserListPage() {
                     orderByJoin: !setNullOrderBy ? orderByRouteValue.joinOrderBy : orderByJoin,
                     orderBy: !setNullOrderBy ? orderByRouteValue.orderBy : orderBy,
                 })
-                // await privilege.setRoles()
-                // roles.value = privilege.getRoles
+
+                if (authStore.roles.data.role_list.length === 0) {
+                    const rolesApi = await fetchRoles({
+                        all: true,
+                        orderBy: [{ column: 'id', direction: 'desc' }],
+                        where: [{ id: [1, 4], inverse: true }],
+                        with: ['get_pages'],
+                    })
+                    dispatch(setRolesRedux(rolesApi))
+                }
                 return userApi
             } catch (error) {
                 console.error(error)
@@ -273,7 +283,6 @@ export default function UserListPage() {
 
     useEffect(() => {
         let query: Record<string, string> = {}
-        console.log('page :>> ', currentPage, formSearch, keySort)
         if (currentPage !== 1) query = Object({ ...query, currentPage: `${currentPage}` })
         Object.entries(formSearch).forEach(([key, value]) => {
             if (value && Number(value) !== -1) {
@@ -303,8 +312,7 @@ export default function UserListPage() {
                 <>
                     <div className="common_pc">
                         <div className="common_search_wrap">
-                            <UserSearch type="pc" roles={roles} pending={pending} search={search}>
-                            </UserSearch>
+                            <UserSearch type="pc" roles={authStore.roles} pending={pending} search={search}></UserSearch>
                         </div>
                     </div>
                     <div className="page_btnarea">

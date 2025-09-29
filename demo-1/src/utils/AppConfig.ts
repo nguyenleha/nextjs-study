@@ -4,6 +4,7 @@ export const AppConfig = {
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     BUILD_ENV: process.env.BUILD_ENV,
     TZ: process.env.TZ,
+    SETTING_MANUAL_SYNC_ENABLED: process.env.SETTING_MANUAL_SYNC_ENABLED,
 
     /**
      * Per page

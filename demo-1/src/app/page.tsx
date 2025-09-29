@@ -5,7 +5,7 @@ import { AsideMenu } from '@/components/shared/AsideMenu'
 import { Header } from '@/components/shared/Header'
 import { Loading } from '@/components/shared/Loading'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setAuth, setRole } from '@/store/slice/auth'
+import { setAuth, setRoleRedux } from '@/store/slice/auth'
 
 import { useCallback, useEffect } from 'react'
 
@@ -18,7 +18,7 @@ export default function Home() {
             if (authStore.getAuth && Object.keys(authStore.getAuth).length === 0) {
                 const apiAuthen = await fetchAuthen()
                 dispatch(setAuth(apiAuthen || {}))
-                dispatch(setRole(apiAuthen.data.roles.role_list))
+                dispatch(setRoleRedux(apiAuthen.data.roles.role_list))
             }
         } catch (error) {
             console.error('Failed to fetch data:', error)

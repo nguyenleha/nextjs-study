@@ -43,7 +43,6 @@ export function UserSearch({ roles, pending, type, search }: Props) {
             const newForm: FormSearch = { ...form }
             dateFields.forEach((item) => {
                 const inputElement = $(`#${item}_${type}`)
-                console.log('inputElement :>> ', item, inputElement)
                 newFormClear[`${item}_${type}`] = inputElement.val() || ''
                 setFormClear(newFormClear)
 
@@ -106,7 +105,7 @@ export function UserSearch({ roles, pending, type, search }: Props) {
                         <TextInput type="text" value={form.full_name} onChange={(value) => setForm((v) => ({ ...v, full_name: value }))} className="form_input" />
                     </FormSearchLi>
                     <FormSearchLi title="権限">
-                        <Select options={roles.data.role_list.map((item) => ({ label: item.name_jp, value: item.id }))} value={form.role} onChange={(e) => setForm((v) => ({ ...v, role: e.target.value }))} className="form_select transition_none" />
+                        <Select id={`role_${type}`} options={roles.data.role_list.map((item) => ({ label: item.name_jp, value: item.id }))} value={form.role} onChange={(e) => setForm((v) => ({ ...v, role: e.target.value }))} className="form_select transition_none" />
                     </FormSearchLi>
                     <FormSearchLi title="更新日時">
                         <InputDate fieldName="updated_at" btnFromClear={formClear[`updated_at_from_${type}`]} btnToClear={formClear[`updated_at_to_${type}`]} type={type} />

@@ -10,7 +10,7 @@ import { LoginRequest } from '@/types/system/user'
 import { TextInput } from '@/components/ui/TextInput'
 import { Button } from '@/components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setAuth, setRole, setUrlAfterLogin } from '@/store/slice/auth'
+import { setAuth, setRoleRedux, setUrlAfterLogin } from '@/store/slice/auth'
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
@@ -42,12 +42,11 @@ export default function LoginPage() {
                 zone: valLogin.zone,
             })
                 .then(async (res) => {
-                    console.log('🚀 ~ submit ~ res:', res)
                     await setToken(res, 'access_token')
                     await setToken(res, 'refresh_token')
                     const apiAuthen = await fetchAuthen()
                     dispatch(setAuth(apiAuthen || {}))
-                    dispatch(setRole(apiAuthen.data.roles.role_list))
+                    dispatch(setRoleRedux(apiAuthen.data.roles.role_list))
 
                     const urlAfterLogin = authStore.urlAfterLogin
                     dispatch(setUrlAfterLogin(''))

@@ -1,4 +1,4 @@
-import { Ability, PagePermissions, Permission } from '@/types/system/auth'
+import { Ability, PagePermissions, Permission, Roles } from '@/types/system/auth'
 import { Role, Auth } from '@/types/system/user'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
@@ -9,6 +9,7 @@ const authSlice = createSlice({
         getAuth: {} as Auth,
         system500: false as boolean,
         abilities: [] as Array<PagePermissions>,
+        roles: { data: { count: 0, role_list: [] } } as Roles,
     },
     reducers: {
         setUrlAfterLogin: (state, action: PayloadAction<string>) => {
@@ -20,7 +21,7 @@ const authSlice = createSlice({
         setAuth: (state, action: PayloadAction<Auth>) => {
             state.getAuth = action.payload
         },
-        setRole: (state, action: PayloadAction<Role[]>) => {
+        setRoleRedux: (state, action: PayloadAction<Role[]>) => {
             const roleList = action.payload
             const pagePermissions: PagePermissions[] = []
             roleList.forEach((ability: Ability) => {
@@ -41,6 +42,9 @@ const authSlice = createSlice({
             })
             state.abilities = pagePermissions
         },
+        setRolesRedux: (state, action: PayloadAction<Roles>) => {
+            state.roles = action.payload
+        },
         setClear: (state, action: PayloadAction<Auth>) => {
             state.abilities = []
             state.getAuth = action.payload
@@ -49,5 +53,5 @@ const authSlice = createSlice({
 })
 
 // 4. Export actions và reducer
-export const { setUrlAfterLogin, setSystem500, setAuth, setRole, setClear } = authSlice.actions
+export const { setUrlAfterLogin, setSystem500, setAuth, setRoleRedux, setClear, setRolesRedux } = authSlice.actions
 export default authSlice.reducer
