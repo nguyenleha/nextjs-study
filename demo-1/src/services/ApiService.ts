@@ -12,7 +12,7 @@ class ApiService {
         this.baseURL = baseURL
     }
 
-    private async request<T>(endpoint: string, options: RequestOptions = {}, cookieMap?: Partial<{ [key: string]: string }>): Promise<T> {
+    private async request<T>(endpoint: string, options: RequestOptions = {}, cookieMap?: Partial<Record<string, string>>): Promise<T> {
         const url = `${this.baseURL}${endpoint}`
         const refreshToken = cookieMap?.['refresh_token'] ?? (await getCookieValue('refresh_token')) ?? ''
         const accessToken = cookieMap?.['access_token'] ?? (await getCookieValue('access_token')) ?? ''
@@ -53,6 +53,7 @@ class ApiService {
                         })
                 } else {
                     await clearToken()
+                    window.location.href = '/login'
                 }
             }
 

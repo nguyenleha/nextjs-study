@@ -9,7 +9,11 @@ import { setAuth, setRole } from '@/store/slice/auth'
 
 import { useCallback, useEffect } from 'react'
 
-export default function Home() {
+export default function AdminLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode
+}>) {
     const authStore = useAppSelector((state) => state.auth)
     const dispatch = useAppDispatch()
 
@@ -39,9 +43,7 @@ export default function Home() {
                     <main id="Main" className="common_main">
                         <div id="LayoutWrap" className="layout_wrap">
                             <AsideMenu />
-                            <div className="layout_main hidden-menu">
-                                {/* <RouterView /> */}
-                            </div>
+                            <div className="layout_main hidden-menu">{children}</div>
                         </div>
                     </main>
                 </>

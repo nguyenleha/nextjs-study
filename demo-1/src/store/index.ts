@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './slice/auth' // Import reducer từ slice mới
+import authReducer from './slice/auth'
+import commonReducer from './slice/common'
 
 export const store = configureStore({
     reducer: {
-        // counter: counterReducer,
-        // todo: todoReducer, // Thêm reducer mới
-        auth: authReducer, // Thêm reducer mới
+        auth: authReducer,
+        common: commonReducer,
     },
 })
 

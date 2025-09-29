@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { StoreProvider } from '@/store/StoreProvider'
-import { Geist, Geist_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 // import '@/styles/demo.css'
 import '@/assets/css/reset.css'
@@ -14,15 +13,7 @@ import '@/assets/js/calendar/pignose.calendar.css'
 import '@/assets/js/select2/select2.css'
 import '@/assets/js/datetimepicker/jquery.datetimepicker.css'
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
-    subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
-    subsets: ['latin'],
-})
+import Script from 'next/script'
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -36,11 +27,18 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                <Script src="/js/jquery-3.7.1.min.js" strategy="beforeInteractive" defer />
+                <Script src="/js/common.js" strategy="beforeInteractive" defer />
+                <Script src="/js/flexibility.js" strategy="beforeInteractive" defer />
+            </head>
             <body>
-                <div v-if="!open" className="pending_app" style={{ height: '50vh' }}>
-                    {/* <LazyAnimationLoading lg /> */}
-                </div>
                 <StoreProvider>{children}</StoreProvider>
+                <Script src="/js/slick/slick.min.js" strategy="afterInteractive" defer />
+                <Script src="/js/jquery.matchHeight.js" strategy="afterInteractive" defer />
+                <Script src="/js/Sortable.min.js" strategy="afterInteractive" defer />
+                <Script src="/js/select2.min.js" strategy="afterInteractive" defer />
+                <Script src="/js/jquery.datetimepicker.full.min.js" strategy="afterInteractive" defer />
             </body>
         </html>
     )

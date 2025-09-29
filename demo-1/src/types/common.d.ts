@@ -68,3 +68,34 @@ export interface TokenResponse extends LinkMetaMessage {
         username: string[]
     }
 }
+
+export interface AsideType {
+    id: number
+    name: string
+    aside_btn: boolean
+    role?: boolean
+    path: string
+    sub: Array<{
+        name: string
+        path: string
+        role?: boolean
+        new_tab: boolean
+    }>
+}
+
+export interface FormSearch {
+    [key: string]: string | number | string[]
+}
+
+export interface OrderBy {
+    column: string
+    direction: string
+}
+
+export type Query = Record<string, string | string[] | number>
+
+export type Params = Record<string, string | string[] | number>
+
+export type WhereCondition = Record<string, string | string[] | { from: string; to: string } | { greaterThanOrEqualTo: string } | { lessThanOrEqualTo: string }>
+
+export type JoinOrderBy = { [key: string]: { orderBy: OrderBy[]; relationship: string } }

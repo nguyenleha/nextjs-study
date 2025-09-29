@@ -1,7 +1,7 @@
 'use client'
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import type React from 'react'
-import { Loading } from '../shared/loading'
+import { Loading } from '@/components/shared/Loading'
 
 export type ButtonProps = PropsWithChildren<{
     className?: string
