@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 
 export type FormDetailLiProps = {
     title: string
@@ -14,6 +15,7 @@ export type FormDetailLiProps = {
 }
 
 export function FormDetailLi({ title, required, errMes, value, href, hrefValue, arrayData, kintoneDeleteFlag, children }: FormDetailLiProps) {
+    const t = useTranslations('components')
     const getArrayData = (arrayData?: string | number | boolean | string[]) => {
         if (arrayData && typeof arrayData === 'object') {
             return arrayData.map((item) => item).join('、')
@@ -25,7 +27,7 @@ export function FormDetailLi({ title, required, errMes, value, href, hrefValue, 
             <div className="detail-form_block">
                 <p className="detail-form_title">
                     {title}
-                    {required && <span>必須</span>}
+                    {required && <span>{t('required')}</span>}
                 </p>
                 <div className="detail-form_main">
                     {children}
@@ -41,7 +43,7 @@ export function FormDetailLi({ title, required, errMes, value, href, hrefValue, 
                             {errMes[0]}
                         </p>
                     )}
-                    {kintoneDeleteFlag && <p className="form_error">(このレコードはKintoneで削除されました。)</p>}
+                    {kintoneDeleteFlag && <p className="form_error">{t('kintoneDeleted')}</p>}
                 </div>
             </div>
         </li>

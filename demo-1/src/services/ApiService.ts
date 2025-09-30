@@ -17,7 +17,7 @@ class ApiService {
         const refreshToken = cookieMap?.['refresh_token'] ?? (await getCookieValue('refresh_token')) ?? ''
         const accessToken = cookieMap?.['access_token'] ?? (await getCookieValue('access_token')) ?? ''
         const tokenType = cookieMap?.['token_type'] ?? (await getCookieValue('token_type')) ?? 'Bearer'
-        const lang = cookieMap?.['lang'] ?? (await getCookieValue('lang')) ?? options.language ?? 'vi'
+        const lang = cookieMap?.['NEXT_LOCALE'] ?? (await getCookieValue('NEXT_LOCALE')) ?? options.language ?? 'vi'
 
         try {
             const res = await fetch(url, {

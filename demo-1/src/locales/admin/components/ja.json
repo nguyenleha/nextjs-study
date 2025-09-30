@@ -1,3 +1,12 @@
 {
-
+    "dashboard": "ダッシュボード",
+    "aside": {
+        "workApproval": "作業承認",
+        "userManagement": "ユーザ管理",
+        "userRegister": "ユーザ登録"
+    },
+    "required": "必須",
+    "kintoneDeleted": "（kintoneで削除されました）",
+    "back": "戻る",
+    "submit": "登録する"
 }

@@ -1,15 +1,16 @@
 import { AsideType } from '@/types/common'
 
-export const useConfigAside = (): AsideType[] => {
+// Nhận vào hàm t (i18n translate) để trả về aside config đa ngôn ngữ
+export const useConfigAside = (t: (key: string) => string): AsideType[] => {
     return [
         {
             id: 3,
-            name: '作業承認',
+            name: t('aside.workApproval'),
             aside_btn: true,
             path: '',
             sub: [
                 {
-                    name: '作業承認',
+                    name: t('aside.workApproval'),
                     path: '/admin',
                     new_tab: false,
                 },
@@ -17,12 +18,12 @@ export const useConfigAside = (): AsideType[] => {
         },
         {
             id: 5,
-            name: 'ユーザ管理',
+            name: t('aside.userManagement'),
             aside_btn: true,
             path: '',
             sub: [
                 {
-                    name: 'ユーザ登録',
+                    name: t('aside.userRegister'),
                     path: '/admin/user',
                     new_tab: false,
                 },

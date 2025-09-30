@@ -5,9 +5,11 @@ import Link from 'next/link'
 import { AsideType } from '@/types/common'
 import { useConfigAside } from '@/utils/Aside'
 import { usePathname } from 'next/navigation'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 export function AsideMenu() {
+    const t = useTranslations('components')
+
     const asideBtn = (asideItem: AsideType) => {
         if (asideItem.aside_btn) {
             const id = `#asideBtn_${asideItem.id}`
@@ -28,10 +30,10 @@ export function AsideMenu() {
             <ul className="aside_list">
                 <li className="aside_item">
                     <Link href={'/admin'} className="aside_link">
-                        ダッシュボード
+                        {t('dashboard')}
                     </Link>
                 </li>
-                {useConfigAside().map((asideItem) => (
+                {useConfigAside(t).map((asideItem) => (
                     <li key={asideItem.id} className="aside_item">
                         {asideItem.aside_btn ? (
                             <>

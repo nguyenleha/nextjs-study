@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState, useMemo, useRef } from 'react'
 import { getQuery, scrollErr, validate } from '@/utils/Common'
@@ -22,6 +23,7 @@ export type Props = {
 }
 
 export function UserFormInput({ isCreate, slug }: Props) {
+    const t = useTranslations('user')
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryObj = useMemo(() => getQuery(searchParams), [searchParams])
@@ -53,7 +55,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
      */
     const cancelBtn = () => {
         const query = commonStore.query
-        return { path: '/admin/usern/usern/usern/user', query }
+        return { path: '/admin/user', query }
     }
 
     const fetchApi = useCallback(async () => {
@@ -143,20 +145,20 @@ export function UserFormInput({ isCreate, slug }: Props) {
 
     return (
         <>
-            <h1 className="common_page_title">{isCreate ? 'ユーザ新規登録' : 'ユーザ編集'}</h1>
+            <h1 className="common_page_title">{isCreate ? t('create_title') : t('edit_title')}</h1>
             {loading ? (
                 <Loading />
             ) : (
                 <div className="detail-form_wrap">
                     <form onSubmit={submit}>
                         <ul className="detail-form_list">
-                            <FormDetailLi title="ログインID" required errMes={errMes?.username}>
+                            <FormDetailLi title={t('login_id')} required errMes={errMes?.username}>
                                 <TextInput type="text" value={form.username} onChange={(value) => setForm((v) => ({ ...v, username: value }))} className="form_input w300" />
                             </FormDetailLi>
-                            <FormDetailLi title="ユーザー名" required errMes={errMes?.full_name}>
+                            <FormDetailLi title={t('user_name')} required errMes={errMes?.full_name}>
                                 <TextInput type="text" value={form.full_name} onChange={(value) => setForm((v) => ({ ...v, full_name: value }))} className="form_input w300" />
                             </FormDetailLi>
-                            <FormDetailLi title="パスワード" required={isCreate} errMes={errMes?.password}>
+                            <FormDetailLi title={t('password')} required={isCreate} errMes={errMes?.password}>
                                 <div className="form_pwd_block">
                                     <TextInput type="password" value={form.password} onChange={(value) => setForm((v) => ({ ...v, password: value }))} className="form_input" />
                                     <button type="button" className="form_pwd_btn PwdBtn">
@@ -166,7 +168,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
                                 </div>
                             </FormDetailLi>
 
-                            <FormDetailLi title="権限">
+                            <FormDetailLi title={t('role')}>
                                 <ul className="form_checkbox_list">
                                     {authStore.roles.data.role_list.map((item, index) => (
                                         <li key={index} className="form_checkbox_item">
@@ -190,7 +192,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
                             </FormDetailLi>
 
                             {date && (
-                                <FormDetailLi title="更新日時">
+                                <FormDetailLi title={t('updatedAt')}>
                                     <p className="common_text_s">{date}</p>
                                 </FormDetailLi>
                             )}

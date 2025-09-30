@@ -10,15 +10,17 @@ import { FormSearchLi } from '@/components/shared/FormSearchLi'
 import { TextInput } from '@/components/ui/TextInput'
 import { Select } from '@/components/ui/Select'
 import { InputDate } from '@/components/ui/inputDate'
+import { useTranslations } from 'next-intl'
 
-export type Props = {
+type UserSearchProps = {
     roles: Roles
     pending: boolean
     type: string
     search: (value: FormSearch) => void
 }
 
-export function UserSearch({ roles, pending, type, search }: Props) {
+export function UserSearch({ roles, pending, type, search }: UserSearchProps) {
+    const t = useTranslations('user')
     const searchParams = useSearchParams()
     const queryObj = useMemo(() => getQuery(searchParams), [searchParams])
 
@@ -71,7 +73,6 @@ export function UserSearch({ roles, pending, type, search }: Props) {
                     datetimepicker(dateFields, newForm, type)
                 })
             })
-
         }
     }, [])
 
@@ -102,23 +103,23 @@ export function UserSearch({ roles, pending, type, search }: Props) {
         <form onSubmit={handleSearch}>
             <div className="common_search_block">
                 <ul className="common_search_list">
-                    <FormSearchLi title="ログインID">
+                    <FormSearchLi title={t('login_id')}>
                         <TextInput type="text" value={form.username} onChange={(value) => setForm((v) => ({ ...v, username: value }))} className="form_input" />
                     </FormSearchLi>
-                    <FormSearchLi title="ユーザー名">
+                    <FormSearchLi title={t('user_name')}>
                         <TextInput type="text" value={form.full_name} onChange={(value) => setForm((v) => ({ ...v, full_name: value }))} className="form_input" />
                     </FormSearchLi>
-                    <FormSearchLi title="権限">
+                    <FormSearchLi title={t('role')}>
                         <Select id={`role_${type}`} options={roles.data.role_list.map((item) => ({ label: item.name_jp, value: item.id }))} value={form.role} onChange={(e) => setForm((v) => ({ ...v, role: e.target.value }))} className="form_select transition_none" />
                     </FormSearchLi>
-                    <FormSearchLi title="更新日時">
+                    <FormSearchLi title={t('updated_at')}>
                         <InputDate fieldName="updated_at" btnFromClear={formClear[`updated_at_from_${type}`]} btnToClear={formClear[`updated_at_to_${type}`]} type={type} />
                     </FormSearchLi>
                 </ul>
             </div>
 
             <Button type="submit" className="common_search_btn" style={{ padding: '0px' }} pending={{ action: pending, white: true }}>
-                ログイン
+                {t('submit')}
             </Button>
         </form>
     )

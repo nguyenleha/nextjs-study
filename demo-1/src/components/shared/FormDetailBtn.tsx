@@ -2,6 +2,7 @@ import { Loading } from '@/components/shared/Loading'
 import Link from 'next/link'
 import { Button } from '../ui/Button'
 import { Query } from '@/types/common'
+import { useTranslations } from 'next-intl'
 
 export type FormDetailBtnProps = {
     pending: boolean
@@ -12,8 +13,9 @@ export type FormDetailBtnProps = {
 }
 
 export function FormDetailBtn({ pending, cancelBtn }: FormDetailBtnProps) {
+    const t = useTranslations('components')
     const getQueryString = (query?: Query) => {
-        if (!query) return ''
+        if (!query || !Object.keys(query).length) return ''
 
         const params = new URLSearchParams()
         Object.entries(query).forEach(([key, value]) => {
@@ -33,12 +35,12 @@ export function FormDetailBtn({ pending, cancelBtn }: FormDetailBtnProps) {
                 </button>
             ) : (
                 <Link href={`${cancelBtn.path}${getQueryString(cancelBtn.query)}`} className="common_cancel_btn">
-                    戻る
+                    {t('back')}
                 </Link>
             )}
 
             <Button className="common_highlight_btn" pending={{ action: pending, white: true }} type="submit">
-                登録する
+                {t('submit')}
             </Button>
         </div>
     )
