@@ -50,11 +50,11 @@ export function Pagination({ totalArticle = 1, currentPage = 1, pending = false,
             <div className="pager_main">
                 {currentPage === 1 ? (
                     <a className="pager_prev_btn disabled">
-                        <Image src={prevArrowDisabled} alt="prev" />
+                        <Image src={prevArrowDisabled} alt="prev" style={{ height: '17px', width: 'auto' }} />
                     </a>
                 ) : (
                     <a className="pager_prev_btn" onClick={() => gotoPage(currentPage - 1)}>
-                        <Image src={prevArrow} alt="prev page" />
+                        <Image src={prevArrow} alt="prev page" style={{ height: '17px', width: 'auto' }} />
                     </a>
                 )}
 
@@ -186,11 +186,11 @@ export function Pagination({ totalArticle = 1, currentPage = 1, pending = false,
 
                 {currentPage === totalArticle ? (
                     <a className="pager_next_btn disabled">
-                        <Image src={prevArrowDisabled} alt="next" />
+                        <Image src={prevArrowDisabled} alt="next" style={{ height: '17px', width: 'auto' }} />
                     </a>
                 ) : (
                     <a className="pager_next_btn" onClick={() => gotoPage(currentPage + 1)}>
-                        <Image src={prevArrow} alt="next" />
+                        <Image src={prevArrow} alt="next" style={{ height: '17px', width: 'auto' }} />
                     </a>
                 )}
             </div>

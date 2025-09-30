@@ -3,10 +3,10 @@
 import { FormSearch, JoinOrderBy, OrderBy, Query, WhereCondition } from '@/types/common'
 // import { Roles } from '@/types/system/auth'
 import { User } from '@/types/userManagement'
-import { useCallback, useEffect, useState, useMemo } from 'react'
+import { useCallback, useEffect, useState, useMemo, useRef } from 'react'
 // import $ from 'jquery'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { getQuery } from '@/utils/Common'
+import { getQuery, routeQuery } from '@/utils/Common'
 import { AppConfig } from '@/utils/AppConfig'
 import { fetchUser } from '@/api/userManagement'
 import { Loading } from '@/components/shared/Loading'
@@ -284,22 +284,27 @@ export default function UserListPage() {
             })
     }, [])
 
+    const isFirstRenderPageAndSort = useRef(true)
     useEffect(() => {
-        let query: Record<string, string> = {}
-        if (currentPage !== 1) query = Object({ ...query, currentPage: `${currentPage}` })
-        Object.entries(formSearch).forEach(([key, value]) => {
-            if (value && Number(value) !== -1) {
-                query[key] = String(value)
-            }
-        })
-        Object.entries(keySort).forEach(([key, value]) => {
-            if (value) {
-                query[key] = String(value)
-            }
-        })
-        dispatch(setQuery(query))
-        router.push(`/user?${new URLSearchParams(query).toString()}`)
-    }, [currentPage, formSearch, keySort])
+        if (isFirstRenderPageAndSort.current) {
+            isFirstRenderPageAndSort.current = false
+            return
+        }
+        const { newQueryObj, querySearchParams } = routeQuery(queryObj, currentPage, formSearch, keySort)
+        dispatch(setQuery(newQueryObj))
+        router.push('/user' + (querySearchParams ? `?${querySearchParams}` : ''))
+    }, [currentPage, keySort])
+
+    const isFirstRenderFormSearch = useRef(true)
+    useEffect(() => {
+        if (isFirstRenderFormSearch.current) {
+            isFirstRenderFormSearch.current = false
+            return
+        }
+        const { newQueryObj, querySearchParams } = routeQuery({}, 1, formSearch, {})
+        dispatch(setQuery(newQueryObj))
+        router.push('/user' + (querySearchParams ? `?${querySearchParams}` : ''))
+    }, [formSearch])
 
     return (
         <>
@@ -343,9 +348,9 @@ export default function UserListPage() {
                                     <tr>
                                         <TableTh title="ログインID" value="username" type={keySort.username_sort} onSort={sort} />
                                         <TableTh title="ユーザー名" value="full_name" type={keySort.full_name_sort} onSort={sort} />
-                                        <TableTh title="権限" value="roles" type={keySort.roles_sort} disable-button onSort={sort} />
+                                        <TableTh title="権限" value="roles" type={keySort.roles_sort} onSort={sort} />
                                         <TableTh title="更新日時" value="updated_at" type={keySort.updated_at_sort} onSort={sort} />
-                                        <TableTh title="操作" disable-button />
+                                        <TableTh title="操作" disableButton />
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -365,7 +370,7 @@ export default function UserListPage() {
                                                     <p className="nowrap">{item.updated_at}</p>
                                                 </td>
                                                 <td className="common_table_info">
-                                                    <Link href={`/user-management/edit/${item.id}`} className="common_table-bland_btn w70">
+                                                    <Link href={`/user/edit/${item.id}`} className="common_table-bland_btn w70">
                                                         編集
                                                     </Link>
                                                 </td>

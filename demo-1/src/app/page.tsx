@@ -13,7 +13,7 @@ export default function Home() {
     const authStore = useAppSelector((state) => state.auth)
     const dispatch = useAppDispatch()
 
-    const test = useCallback(async () => {
+    const apiAuthenHook = useCallback(async () => {
         try {
             if (authStore.getAuth && Object.keys(authStore.getAuth).length === 0) {
                 const apiAuthen = await fetchAuthen()
@@ -28,8 +28,8 @@ export default function Home() {
     }, [dispatch, authStore])
 
     useEffect(() => {
-        test()
-    }, [test])
+        apiAuthenHook()
+    }, [])
 
     return (
         <>

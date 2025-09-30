@@ -31,9 +31,20 @@ export function UserSearch({ roles, pending, type, search }: Props) {
             Object.entries(queryObj).forEach(([key, value]) => {
                 if (key !== 'currentPage' && !key.includes('_sort')) formField[key] = value
             })
-            setForm({ ...form, ...formField })
+            setForm((prev) => ({ ...prev, ...formField }))
         }
     }, [queryObj])
+
+    useEffect(() => {
+        // Log form value after it has been updated
+        $(`#role_${type}`).select2({
+            multiple: true,
+            placeholder: '',
+            allowClear: true,
+            closeOnSelect: false,
+        })
+        $(`#role_${type}`).val(form.role).trigger('change')
+    }, [form])
 
     useEffect(() => {
         if (typeof window !== 'undefined' && $ && $.datetimepicker) {
@@ -61,13 +72,6 @@ export function UserSearch({ roles, pending, type, search }: Props) {
                 })
             })
 
-            $(`#role_${type}`).select2({
-                multiple: true,
-                placeholder: '',
-                allowClear: true,
-                closeOnSelect: false,
-            })
-            $(`#role_${type}`).val(form.role).trigger('change')
         }
     }, [])
 

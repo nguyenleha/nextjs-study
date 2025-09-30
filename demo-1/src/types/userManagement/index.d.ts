@@ -21,6 +21,7 @@ export interface ErrorsUser {
   full_name?: string[]
   username?: string[]
   password?: string[]
+  [key: string]: string[] | undefined
 }
 export interface User extends LinkMetaMessage {
   data: Array<UserList>

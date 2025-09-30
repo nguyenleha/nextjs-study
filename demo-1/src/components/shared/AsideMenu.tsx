@@ -3,7 +3,7 @@
 import Link from 'next/link'
 // import $ from 'jquery'
 import { AsideType } from '@/types/common'
-import { useConfigAside } from '@/utils/aside'
+import { useConfigAside } from '@/utils/Aside'
 import { usePathname } from 'next/navigation'
 
 export function AsideMenu() {

@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setAuth, setRoleRedux, setUrlAfterLogin } from '@/store/slice/auth'
 import { useRouter } from 'next/navigation'
+import { validate } from '@/utils/Common'
 
 export default function LoginPage() {
     const router = useRouter()
@@ -26,12 +27,9 @@ export default function LoginPage() {
         setErrMes({})
     }, [valLogin])
 
-    const validate = () => {
-        return !pending && Object.values(errMes).every((item) => item.length === 0)
-    }
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (validate()) {
+        if (validate(pending, errMes)) {
             setPending(true)
             await clearToken()
             // Submit logic here
