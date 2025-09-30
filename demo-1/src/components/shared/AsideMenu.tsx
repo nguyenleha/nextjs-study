@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { AsideType } from '@/types/common'
 import { useConfigAside } from '@/utils/Aside'
 import { usePathname } from 'next/navigation'
+import { useLocale } from 'next-intl'
 
 export function AsideMenu() {
     const asideBtn = (asideItem: AsideType) => {
@@ -15,8 +16,11 @@ export function AsideMenu() {
     }
 
     const pathname = usePathname()
+    const locale = useLocale()
+
     const active = (path: string) => {
-        return path === String(pathname)
+        if (String(pathname) === path) return true
+        return path !== `/${locale}/admin` && path !== '/admin' && String(pathname).includes(path)
     }
 
     return (

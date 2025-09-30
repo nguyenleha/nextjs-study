@@ -4,6 +4,7 @@ import { fetchAuthen } from '@/api/system/auth'
 import { AsideMenu } from '@/components/shared/AsideMenu'
 import { Header } from '@/components/shared/Header'
 import { Loading } from '@/components/shared/Loading'
+import { LocaleSwitcher } from '@/components/shared/LocaleSwitcher'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setAuth, setRoleRedux } from '@/store/slice/auth'
 
@@ -43,7 +44,10 @@ export default function AdminLayout({
                     <main id="Main" className="common_main">
                         <div id="LayoutWrap" className="layout_wrap">
                             <AsideMenu />
-                            <div className="layout_main hidden-menu">{children}</div>
+                            <div className="layout_main hidden-menu">
+                                <LocaleSwitcher />
+                                {children}
+                            </div>
                         </div>
                     </main>
                 </>

@@ -11,10 +11,13 @@ import { TextInput } from '@/components/ui/TextInput'
 import { Button } from '@/components/ui/Button'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setAuth, setRoleRedux, setUrlAfterLogin } from '@/store/slice/auth'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { validate } from '@/utils/Common'
+import { LocaleSwitcher } from '@/components/shared/LocaleSwitcher';
 
 export default function LoginPage() {
+    const t = useTranslations('login')
     const router = useRouter()
 
     const [valLogin, setValLogin] = useState<LoginRequest>({ username: 'super_admin', password: 'Pa12345!@#@', remember_me: true, zone: 'DASHBOARD' })
@@ -62,26 +65,27 @@ export default function LoginPage() {
 
     return (
         <>
-            <h1 className="login_title">ログイン</h1>
+            <h1 className="login_title">{t('title')}</h1>
+             <LocaleSwitcher />
             <form onSubmit={submit}>
                 <ul className="login_list">
                     <li className="login_item">
                         <div className="login_input_block">
                             <Image src={userIcon} width={24} height={24} alt="user" />
-                            <TextInput placeholder="User" type="text" value={valLogin.username} onChange={(value) => setValLogin((v) => ({ ...v, username: value }))} className="login_input" />
+                            <TextInput placeholder={t('username')} type="text" value={valLogin.username} onChange={(value) => setValLogin((v) => ({ ...v, username: value }))} className="login_input" />
                         </div>
                         {errMes?.username && errMes.username[0] && <p className="form_error">{errMes.username[0]}</p>}
                     </li>
                     <li className="login_item">
                         <div className="login_input_block">
                             <Image src={pwdIcon} width={24} height={24} alt="password" />
-                            <TextInput placeholder="Password" type="password" value={valLogin.password} onChange={(value) => setValLogin((v) => ({ ...v, password: value }))} className="login_input" />
+                            <TextInput placeholder={t('password')} type="password" value={valLogin.password} onChange={(value) => setValLogin((v) => ({ ...v, password: value }))} className="login_input" />
                         </div>
                         {errMes?.password && errMes.password[0] && <p className="form_error">{errMes.password[0]}</p>}
                     </li>
                 </ul>
                 <Button type="submit" className="common_highlight_btn w240 center" pending={{ action: pending, white: true }}>
-                    ログイン
+                    {t('button')}
                 </Button>
             </form>
         </>

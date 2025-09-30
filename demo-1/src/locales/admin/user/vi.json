@@ -1,0 +1,16 @@
+{
+  "profile": "Hồ sơ",
+  "settings": "Cài đặt người dùng",
+  "user_list_title": "Danh sách người dùng",
+  "filter_search": "Tìm kiếm nâng cao",
+  "create_new": "Tạo mới",
+  "total_count": "Tổng {total} bản ghi",
+  "showing_count": "Hiển thị {from}-{to}",
+  "login_id": "Tên đăng nhập",
+  "user_name": "Tên người dùng",
+  "role": "Quyền hạn",
+  "updated_at": "Cập nhật lúc",
+  "action": "Thao tác",
+  "edit": "Chỉnh sửa",
+  "no_data": "Không có dữ liệu"
+}

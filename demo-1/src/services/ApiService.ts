@@ -53,7 +53,7 @@ class ApiService {
                         })
                 } else {
                     await clearToken()
-                    window.location.href = '/login'
+                    window.location.href = '/sign-in'
                 }
             }
 

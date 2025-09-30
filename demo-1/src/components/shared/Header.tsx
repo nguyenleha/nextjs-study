@@ -20,7 +20,7 @@ export function Header() {
                         <ul className="header_list">
                             <li className="header_item">
                                 <Link
-                                    href={'/login'}
+                                    href={'/sign-in'}
                                     className="header_link"
                                     onClick={() => {
                                         clearToken()

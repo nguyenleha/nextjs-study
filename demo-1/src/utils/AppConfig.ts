@@ -1,3 +1,5 @@
+import { LocalePrefixMode } from "next-intl/routing";
+
 // FIXME: Update this configuration file based on your project information
 export const AppConfig = {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
@@ -67,4 +69,17 @@ export const RoleConfig = {
         APPROVER: 5,
         SALE: 6,
     },
+}
+
+const localePrefix: LocalePrefixMode = 'as-needed' // 'always' | 'never' | 'as-needed'
+
+// Available options: 'always' | 'never' | 'as-needed'
+// - 'always': Always prefix the locale (e.g., /en, /ja)
+// - 'never': Never prefix the locale (e.g., /about)
+// - 'as-needed': Prefix the locale only when it's not the default locale (e.g., /about, /ja/about if default is 'en')
+export const LocaleConfig = {
+    name: 'Nextjs Starter',
+    locales: ['ja', 'vi'],
+    defaultLocale: 'ja',
+    localePrefix,
 }

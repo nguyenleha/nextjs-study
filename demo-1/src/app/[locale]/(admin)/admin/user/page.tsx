@@ -1,6 +1,7 @@
 'use client'
 
 import { FormSearch, JoinOrderBy, OrderBy, Query, WhereCondition } from '@/types/common'
+import { useTranslations } from 'next-intl'
 // import { Roles } from '@/types/system/auth'
 import { User } from '@/types/userManagement'
 import { useCallback, useEffect, useState, useMemo, useRef } from 'react'
@@ -23,6 +24,7 @@ import Image from 'next/image'
 import closeIcon from '@/assets/images/common/close_icon.svg'
 
 export default function UserListPage() {
+    const t = useTranslations('user')
     const router = useRouter()
     const searchParams = useSearchParams()
     const queryObj = useMemo(() => getQuery(searchParams), [searchParams])
@@ -309,9 +311,9 @@ export default function UserListPage() {
     return (
         <>
             <div className="common_page_title_block">
-                <h1 className="common_page_title">ユーザ一覧</h1>
+                <h1 className="common_page_title">{t('user_list_title')}</h1>
                 <button className="common_search_btn" onClick={SearchBtnSP}>
-                    <span>絞り込み検索</span>
+                    <span>{t('filter_search')}</span>
                 </button>
             </div>
             {pendingAll ? (
@@ -325,19 +327,19 @@ export default function UserListPage() {
                     </div>
                     <div className="page_btnarea">
                         <div className="page_btnarea_main">
-                            <Link href="/user/create" className="common_highlight_btn w150">
-                                ＋ 新規作成
+                            <Link href="/admin/user/create" className="common_highlight_btn w150">
+                                ＋ {t('create_new')}
                             </Link>
                         </div>
                         <div className="page_btnarea_sub"></div>
                     </div>
                     <p className="common_table_result">
-                        全{!pending ? user.meta?.total || 0 : 0}件中
-                        {!pending ? user.meta?.from || 0 : 0}-{!pending ? user.meta?.to || 0 : 0}件目
+                        {t('total_count', { total: !pending ? user.meta?.total || 0 : 0 })}
+                        {t('showing_count', { from: !pending ? user.meta?.from || 0 : 0, to: !pending ? user.meta?.to || 0 : 0 })}
                     </p>
                     <div className="common_table_wrap relative">
                         {pendingSort && (
-                            <div v-if="pendingSort" id="table_pending_custom" className="common_table_block table_pending_custom mt-40-custom">
+                            <div id="table_pending_custom" className="common_table_block table_pending_custom mt-40-custom">
                                 <Loading className="animation_loading" />
                             </div>
                         )}
@@ -346,11 +348,11 @@ export default function UserListPage() {
                             <table className="common_table w800">
                                 <thead>
                                     <tr>
-                                        <TableTh title="ログインID" value="username" type={keySort.username_sort} onSort={sort} />
-                                        <TableTh title="ユーザー名" value="full_name" type={keySort.full_name_sort} onSort={sort} />
-                                        <TableTh title="権限" value="roles" type={keySort.roles_sort} onSort={sort} />
-                                        <TableTh title="更新日時" value="updated_at" type={keySort.updated_at_sort} onSort={sort} />
-                                        <TableTh title="操作" disableButton />
+                                        <TableTh title={t('login_id')} value="username" type={keySort.username_sort} onSort={sort} />
+                                        <TableTh title={t('user_name')} value="full_name" type={keySort.full_name_sort} onSort={sort} />
+                                        <TableTh title={t('role')} value="roles" type={keySort.roles_sort} onSort={sort} />
+                                        <TableTh title={t('updated_at')} value="updated_at" type={keySort.updated_at_sort} onSort={sort} />
+                                        <TableTh title={t('action')} disableButton />
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -370,8 +372,8 @@ export default function UserListPage() {
                                                     <p className="nowrap">{item.updated_at}</p>
                                                 </td>
                                                 <td className="common_table_info">
-                                                    <Link href={`/user/edit/${item.id}`} className="common_table-bland_btn w70">
-                                                        編集
+                                                    <Link href={`/admin/user/edit/${item.id}`} className="common_table-bland_btn w70">
+                                                        {t('edit')}
                                                     </Link>
                                                 </td>
                                             </tr>
@@ -379,7 +381,7 @@ export default function UserListPage() {
                                     ) : (
                                         <tr>
                                             <td colSpan={5} style={{ textAlign: 'center' }}>
-                                                データがありません
+                                                {t('no_data')}
                                             </td>
                                         </tr>
                                     )}

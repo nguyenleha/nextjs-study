@@ -1,0 +1,16 @@
+{
+  "profile": "プロフィール",
+  "settings": "ユーザー設定",
+  "user_list_title": "ユーザ一覧",
+  "filter_search": "絞り込み検索",
+  "create_new": "新規作成",
+  "total_count": "全{total}件中",
+  "showing_count": "{from}-{to}件目",
+  "login_id": "ログインID",
+  "user_name": "ユーザー名",
+  "role": "権限",
+  "updated_at": "更新日時",
+  "action": "操作",
+  "edit": "編集",
+  "no_data": "データがありません"
+}

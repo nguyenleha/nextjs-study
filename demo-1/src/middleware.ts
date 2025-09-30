@@ -1,7 +1,11 @@
 import type { NextRequest } from 'next/server'
 import { detectBot } from '@arcjet/next'
+import createMiddleware from 'next-intl/middleware'
 import { NextResponse } from 'next/server'
 import arcjet from '@/libs/Arcjet'
+import { routing } from './libs/I18nRouting'
+
+const handleI18nRouting = createMiddleware(routing)
 
 // Improve security with Arcjet
 const aj = arcjet.withRule(
@@ -18,19 +22,6 @@ const aj = arcjet.withRule(
 )
 
 export default async function middleware(request: NextRequest) {
-    // Custom logic: redirect based on access_token cookie
-    const accessToken = request.cookies.get('access_token')?.value
-    const url = request.nextUrl
-    const isLoginPage = url.pathname.startsWith('/login')
-    const isAdminPage = url.pathname.startsWith('/admin')
-
-    if (isLoginPage && accessToken) {
-        return NextResponse.redirect(new URL('/admin', request.url))
-    }
-    if (isAdminPage && !accessToken) {
-        return NextResponse.redirect(new URL('/login', request.url))
-    }
-
     // Verify the request with Arcjet
     // Use `process.env` instead of Env to reduce bundle size in middleware
     if (process.env.ARCJET_KEY) {
@@ -40,6 +31,26 @@ export default async function middleware(request: NextRequest) {
             return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
         }
     }
+
+    // Custom logic: redirect based on access_token cookie
+    const accessToken = request.cookies.get('access_token')?.value
+    const url = request.nextUrl
+    const isLoginPage = url.pathname.startsWith('/sign-in')
+    const isAdminPage = url.pathname.startsWith('/admin')
+
+    if (isLoginPage && accessToken) {
+        NextResponse.redirect(new URL('/admin', request.url))
+    }
+    if (isAdminPage && !accessToken) {
+        NextResponse.redirect(new URL('/sign-in', request.url))
+    }
+    
+    const localeCookie = request.cookies.get('NEXT_LOCALE')?.value
+    if (!localeCookie) {
+        request.cookies.set('NEXT_LOCALE', 'ja')
+    }
+
+    return handleI18nRouting(request)
 }
 
 export const config = {
