@@ -6,7 +6,7 @@ import { Header } from '@/components/shared/Header'
 import { Loading } from '@/components/shared/Loading'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setAuth, setRoleRedux } from '@/store/slice/auth'
-
+import '@/libs/i18n'
 import { useCallback, useEffect } from 'react'
 
 export default function AdminLayout({

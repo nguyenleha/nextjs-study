@@ -1,55 +1,36 @@
 'use client'
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import Cookies from 'js-cookie'
 
-import { fetchAuthen } from '@/api/system/auth'
-import { AsideMenu } from '@/components/shared/AsideMenu'
-import { Header } from '@/components/shared/Header'
-import { Loading } from '@/components/shared/Loading'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { setAuth, setRoleRedux } from '@/store/slice/auth'
-
-import { useCallback, useEffect } from 'react'
+const LANGS = [
+    { code: 'vi', label: 'Tiếng Việt' },
+    { code: 'ja', label: '日本語' },
+]
 
 export default function Admin() {
-    const authStore = useAppSelector((state) => state.auth)
-    const dispatch = useAppDispatch()
+    const { t, i18n } = useTranslation()
+    const [lang, setLang] = useState(i18n.language || 'vi')
 
-    const apiAuthenHook = useCallback(async () => {
-        try {
-            if (authStore.getAuth && Object.keys(authStore.getAuth).length === 0) {
-                const apiAuthen = await fetchAuthen()
-                dispatch(setAuth(apiAuthen || {}))
-                dispatch(setRoleRedux(apiAuthen.data.roles.role_list))
-            }
-        } catch (error) {
-            console.error('Failed to fetch data:', error)
-        } finally {
-            // setLoading(false)
-        }
-    }, [dispatch, authStore])
-
-    useEffect(() => {
-        apiAuthenHook()
-    }, [])
-
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newLang = e.target.value
+        setLang(newLang)
+        i18n.changeLanguage(newLang)
+        Cookies.set('locale', newLang, { expires: 365 })
+    }
     return (
-        <>
-            {authStore.getAuth && Object.keys(authStore.getAuth).length > 0 ? (
-                <>
-                    <Header />
-                    <main id="Main" className="common_main">
-                        <div id="LayoutWrap" className="layout_wrap">
-                            <AsideMenu />
-                            <div className="layout_main hidden-menu">
-                                {/* <RouterView /> */}
-                            </div>
-                        </div>
-                    </main>
-                </>
-            ) : (
-                <div className="pending_app" style={{ height: '50vh' }}>
-                    <Loading lg />
-                </div>
-            )}
-        </>
+        <div style={{ padding: 32 }}>
+            <h1>{t('hello')}</h1>
+            <label>
+                {t('language')}:
+                <select value={lang} onChange={handleChange} style={{ marginLeft: 8 }}>
+                    {LANGS.map((l) => (
+                        <option key={l.code} value={l.code}>
+                            {l.label}
+                        </option>
+                    ))}
+                </select>
+            </label>
+        </div>
     )
 }
