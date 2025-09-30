@@ -1,5 +1,6 @@
 {
     "dashboard": "Bảng điều khiển",
+    "logout": "Đăng xuất",
     "aside": {
         "workApproval": "Phê duyệt công việc",
         "userManagement": "Quản lý người dùng",

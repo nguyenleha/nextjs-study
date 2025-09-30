@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import { clearToken } from '@/utils/ApiUtils'
+import { useTranslations } from 'next-intl'
 
 export function Header() {
+    const t = useTranslations('components')
     return (
         <header>
             <div className="header_wrap">
@@ -26,7 +28,7 @@ export function Header() {
                                         clearToken()
                                     }}
                                 >
-                                    Logout
+                                    {t('logout')}
                                 </Link>
                             </li>
                         </ul>
