@@ -15,6 +15,9 @@ import { API_BASE_URL, getCookieValue, removeCookieValue, setToken, clearToken }
  * - cookieMap: map tạm thời (ví dụ khi SSR) để đọc token thay vì đọc từ cookies thực tế
  */
 export async function apiFetch<T>(path: string, options: RequestOptions = {}, cookieMap?: Partial<{ [key: string]: string }>): Promise<T> {
+    console.log('path', path)
+    console.log('options', options)
+
     try {
         // 1) Xác định base URL: ưu tiên options.baseUrl, sau đó API_BASE_URL, cuối cùng là chuỗi rỗng
         const base = options.baseUrl ?? API_BASE_URL ?? ''

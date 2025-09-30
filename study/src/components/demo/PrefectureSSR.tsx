@@ -20,35 +20,40 @@ export default async function PrefectureSSR({ searchParams, basePath }: Props) {
     const pageSize = Number.isFinite(perPage) && perPage > 0 ? perPage : 8
 
     // SSR: fetch prefecture on the server and render immediately
-    // const prefecture = await apiFetch<PrefectureResponse>('/prefecture/search', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //         page: currentPage,
-    //         perPage: pageSize,
-    //     }),
-    // })
+    const prefecture = await apiFetch('/system/user/search', {
+        method: 'POST',
+        body: JSON.stringify({
+            doesntHave: {
+                roles: {
+                    where: [{ 'roles.id': [1, 4], strict: true }],
+                    relationship: 'roles',
+                },
+            },
+        }),
+    })
     // const prefecture = await apiFetch<PrefectureResponse>('/system/health', {
     //     method: 'GET',
     // })
-    // console.log('prefecture :>> ', prefecture)
+    console.log('prefecture :>> ', prefecture)
     return (
         <>
             <table border={1} cellSpacing={0} cellPadding={8} style={{ marginTop: 12 }}>
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>name</th>
-                        <th>alphabet</th>
+                        <th style={{ paddingLeft: '20px' }}>STT</th>
+                        <th style={{ paddingLeft: '20px' }}>full_name</th>
+                        <th style={{ paddingLeft: '20px' }}>username</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {prefecture.data.list.map((u) => (
-                        <tr key={u.id}>
-                            <td>{u.id}</td>
-                            <td>{u.name}</td>
-                            <td>{u.alphabet}</td>
-                        </tr>
-                    ))} */}
+                    {prefecture &&
+                        prefecture.data.map((u) => (
+                            <tr key={u.id}>
+                                <td style={{ paddingLeft: '20px' }}>{u.id}</td>
+                                <td style={{ paddingLeft: '20px' }}>{u.full_name}</td>
+                                <td style={{ paddingLeft: '20px' }}>{u.username}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
             <div style={{ marginTop: 16 }}>{/* <Pagination currentPage={prefecture.meta.current_page} totalPages={prefecture.meta.last_page} pageSize={pageSize} basePath={basePath} /> */}</div>
