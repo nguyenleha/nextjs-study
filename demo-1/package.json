@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@arcjet/next": "^1.0.0-beta.12",
     "@reduxjs/toolkit": "^2.9.0",
     "jquery": "^3.7.1",
     "js-cookie": "^3.0.5",

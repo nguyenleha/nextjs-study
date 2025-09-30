@@ -53,7 +53,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
      */
     const cancelBtn = () => {
         const query = commonStore.query
-        return { path: '/user', query }
+        return { path: '/admin/usern/usern/usern/user', query }
     }
 
     const fetchApi = useCallback(async () => {
@@ -80,7 +80,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
                         setForm(formData)
                         setDate(res.data.updated_at)
                     })
-                    .catch(() => router.push('/user'))
+                    .catch(() => router.push('/admin/user'))
             }
             setLoading(false)
         } catch (error) {
@@ -109,7 +109,7 @@ export function UserFormInput({ isCreate, slug }: Props) {
                 else await fetchUserUpdate(String(slug), formUpdate)
 
                 dispatch(setQuery({}))
-                await router.push('/user')
+                await router.push('/admin/user')
             } catch (error) {
                 const errors = typeof error === 'object' && error && 'errors' in error ? (error as ErrorsUser).errors : {}
                 setErrMes((prev) => ({ ...prev, ...errors }))

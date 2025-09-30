@@ -292,7 +292,7 @@ export default function UserListPage() {
         }
         const { newQueryObj, querySearchParams } = routeQuery(queryObj, currentPage, formSearch, keySort)
         dispatch(setQuery(newQueryObj))
-        router.push('/user' + (querySearchParams ? `?${querySearchParams}` : ''))
+        router.push('/admin/user' + (querySearchParams ? `?${querySearchParams}` : ''))
     }, [currentPage, keySort])
 
     const isFirstRenderFormSearch = useRef(true)
@@ -303,7 +303,7 @@ export default function UserListPage() {
         }
         const { newQueryObj, querySearchParams } = routeQuery({}, 1, formSearch, {})
         dispatch(setQuery(newQueryObj))
-        router.push('/user' + (querySearchParams ? `?${querySearchParams}` : ''))
+        router.push('/admin/user' + (querySearchParams ? `?${querySearchParams}` : ''))
     }, [formSearch])
 
     return (

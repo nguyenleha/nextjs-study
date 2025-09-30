@@ -48,7 +48,7 @@ export default function LoginPage() {
 
                     const urlAfterLogin = authStore.urlAfterLogin
                     dispatch(setUrlAfterLogin(''))
-                    router.push(urlAfterLogin || '/')
+                    router.push(urlAfterLogin || '/admin')
                 })
                 .catch((error) => {
                     if (error?.errors) {

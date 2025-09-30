@@ -16,14 +16,14 @@ export function AsideMenu() {
 
     const pathname = usePathname()
     const active = (path: string) => {
-        return path === String(pathname) || String(pathname).includes(`${path}/`)
+        return path === String(pathname)
     }
 
     return (
         <aside id="AsideMenu" className="layout_aside">
             <ul className="aside_list">
                 <li className="aside_item">
-                    <Link href={'/'} className="aside_link">
+                    <Link href={'/admin'} className="aside_link">
                         ダッシュボード
                     </Link>
                 </li>
