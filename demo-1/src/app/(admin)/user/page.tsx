@@ -34,7 +34,7 @@ export default function UserListPage() {
      * Data
      * =====================
      */
-    const [currentPage, setCurrentPage] = useState<number>(Number(new URLSearchParams(window.location.search).get('currentPage')) || 1)
+    const [currentPage, setCurrentPage] = useState<number>(Number(searchParams.get('currentPage')) || 1)
     const [totalArticle, setTotalArticle] = useState<number>(1)
     const [user, setUser] = useState<User>({ data: [] })
     // const [roles, setRoles] = useState<Roles>({ data: { count: 0, role_list: [] } })
