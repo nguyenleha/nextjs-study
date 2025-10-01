@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import { StoreProvider } from '../store/StoreProvider'
+import { StoreProvider } from '@/store/StoreProvider'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -35,7 +36,9 @@ export default function RootLayout({
                 <Script src="/js/common.js" strategy="afterInteractive" />
                 <Script src="/js/slick-config.js" strategy="afterInteractive" />
 
-                <StoreProvider>{children}</StoreProvider>
+                <ThemeProvider>
+                    <StoreProvider>{children}</StoreProvider>
+                </ThemeProvider>
             </body>
         </html>
     )

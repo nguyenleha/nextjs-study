@@ -1,0 +1,155 @@
+{
+    "liveSassCompile.settings.autoprefix": [],
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "compressed",
+            "extensionName": ".min.css",
+            "savePath": "~/../css",
+            "savePathReplacementPairs": null
+        }
+    ],
+    "liveSassCompile.settings.excludeList": [
+        "/**/vendor/**",
+        "/**/bootstrap/**",
+        "/scss-default/**",
+        "/**/scss-default/**",
+        "/**/frontend/**"
+    ],
+    // Cấu hình định dạng (formatting) bằng Prettier
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": true
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": true
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.formatOnSave": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    // Cấu hình bổ sung cho Prettier
+    "prettier.printWidth": 800,
+    "prettier.tabWidth": 4,
+    "prettier.semi": false,
+    "prettier.useTabs": false,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.bracketSpacing": true,
+    "prettier.arrowParens": "always",
+    "prettier.htmlWhitespaceSensitivity": "ignore",
+    // Cấu hình bổ sung cho HTML
+    "html.format.indentInnerHtml": true,
+    "html.format.wrapLineLength": 120,
+    "html.format.wrapAttributes": "force-expand-multiline",
+    // Cấu hình bổ sung cho CSS/SCSS
+    "css.validate": true,
+    "scss.validate": true,
+    "css.lint.unknownAtRules": "ignore",
+    "scss.lint.unknownAtRules": "ignore",
+    // Cấu hình cho PHP
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": true,
+            "strings": true
+        }
+    },
+    // Cấu hình cho Blade (Laravel templating)
+    "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter",
+        "editor.formatOnSave": false,
+        "editor.autoIndent": "advanced",
+        "editor.wordWrap": "on"
+    },
+    // PHP Intelephense settings
+    "intelephense.format.enable": true,
+    "intelephense.stubs": [
+        "apache",
+        "bcmath",
+        "core",
+        "curl",
+        "date",
+        "dom",
+        "fileinfo",
+        "gd",
+        "json",
+        "mbstring",
+        "mysql",
+        "mysqli",
+        "openssl",
+        "pcre",
+        "pdo",
+        "pdo_mysql",
+        "reflection",
+        "session",
+        "simplexml",
+        "sodium",
+        "standard",
+        "tokenizer",
+        "xml",
+        "zip",
+        "zlib",
+        "laravel" // Adds Laravel-specific autocompletion
+    ],
+    "intelephense.phpdoc.returnVoid": true,
+    "intelephense.diagnostics.undefinedMethods": true,
+    "intelephense.diagnostics.undefinedFunctions": true,
+    // Blade Formatter settings
+    "bladeFormatter.format.enabled": true,
+    "bladeFormatter.format.indentSize": 2,
+    "bladeFormatter.format.wrapLineLength": 120,
+    "bladeFormatter.format.useTabs": false,
+    // PHP validation and linting
+    "php.validate.enable": true,
+    "php.validate.run": "onSave",
+    "php.suggest.basic": false, // Disables basic PHP suggestions in favor of Intelephense
+    // File associations for Blade
+    "files.associations": {
+        "*.blade.php": "blade",
+        "*.php": "php"
+    },
+    // Tailwind CSS experimental support (for FilamentPHP)
+    "tailwindCSS.experimental.classRegex": [
+        [
+            "class\\s*=\\s*['\"]([^'\"]*)['\"]",
+            "[^'\"]*"
+        ]
+    ],
+    // eslint Frontend
+    "eslint.useFlatConfig": true,
+    "makefile.configureOnOpen": true,
+    "git.ignoreMissingGitWarning": true,
+    "workbench.iconTheme": "vscode-icons",
+    "php.validate.executablePath": "",
+    "editor.formatOnSave": true,
+    "codeium.enableCodeLens": false,
+    "php.format.rules.chainedMethodCallsSemicolonOnNewLine": true,
+    "files.autoSave": "afterDelay",
+    "liveServer.settings.donotShowInfoMsg": true,
+    // default settings MacOS
+    "editor.wordWrap": "on",
+    "window.zoomLevel": -1
+}

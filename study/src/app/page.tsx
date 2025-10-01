@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { CounterDemo } from '../components/demo/CounterReduxDemo'
-import { TodoDemo } from '../components/demo/TodoDemo'
+import { CounterDemo } from '@/components/demo/CounterReduxDemo'
+import { TodoDemo } from '@/components/demo/TodoDemo'
 import { Header } from '@/components/shared/Header'
 
 export default function Home() {

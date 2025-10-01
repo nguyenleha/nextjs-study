@@ -1,4 +1,4 @@
-import { sleep } from '../lib/utils'
+import { sleep } from '@/lib/utils'
 
 export async function loginService(username: string) {
     await sleep(300)

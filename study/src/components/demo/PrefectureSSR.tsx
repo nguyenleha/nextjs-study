@@ -3,7 +3,7 @@
 import { apiFetch } from '@/lib/oauth2'
 import { PrefectureResponse } from '@/types/prefecture'
 import { PageProps } from '@/types/next'
-import { Pagination } from '../ui/Pagination'
+import { Pagination } from '@/components/ui/Pagination'
 import { cookies } from 'next/headers'
 
 type Props = PageProps & { basePath: string }
@@ -20,7 +20,7 @@ export default async function PrefectureSSR({ searchParams, basePath }: Props) {
     const pageSize = Number.isFinite(perPage) && perPage > 0 ? perPage : 8
 
     // SSR: fetch prefecture on the server and render immediately
-    const prefecture = await apiFetch('/system/user/search', {
+    const prefecture: any = await apiFetch('/system/user/search', {
         method: 'POST',
         body: JSON.stringify({
             doesntHave: {
@@ -47,7 +47,7 @@ export default async function PrefectureSSR({ searchParams, basePath }: Props) {
                 </thead>
                 <tbody>
                     {prefecture &&
-                        prefecture.data.map((u) => (
+                        prefecture.data.map((u: any) => (
                             <tr key={u.id}>
                                 <td style={{ paddingLeft: '20px' }}>{u.id}</td>
                                 <td style={{ paddingLeft: '20px' }}>{u.full_name}</td>

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { addTodo, toggleTodo, removeTodo, setFilter, clearCompleted } from '../../store/todoSlice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { addTodo, toggleTodo, removeTodo, setFilter, clearCompleted } from '@/store/todoSlice'
 
 export function TodoDemo() {
     const [inputText, setInputText] = useState('')

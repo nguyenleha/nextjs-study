@@ -1,0 +1,38 @@
+[
+    {
+        "key": "cmd+ctrl+down",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "clear\u000Dnpm run lint:fix\u000Dnpm run lint\u000D"
+        }
+    },
+    {
+        "key": "cmd+ctrl+up",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "npm run build\u000Dnpm start\u000D"
+        }
+    },
+    {
+        "key": "cmd+ctrl+left",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "clear\u000Dnpm run dev\u000D"
+        }
+    },
+    {
+        "key": "cmd+ctrl+right",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "clear\u000D"
+        }
+    },
+    {
+        "key": "cmd+ctrl+shift+'",
+        "command": "editor.action.insertSnippet",
+        "args": {
+            "snippet": "console.log('Check :>> ', ${1:value}$0)"
+        },
+        "when": "editorTextFocus"
+    }
+]

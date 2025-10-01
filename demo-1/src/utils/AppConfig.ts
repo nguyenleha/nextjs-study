@@ -1,4 +1,4 @@
-import { LocalePrefixMode } from "next-intl/routing";
+import { LocalePrefixMode } from 'next-intl/routing'
 
 // FIXME: Update this configuration file based on your project information
 export const AppConfig = {
