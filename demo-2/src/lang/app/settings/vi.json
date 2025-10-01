@@ -1,0 +1,81 @@
+{
+  "title": "Cài Đặt",
+  "subtitle": "& Cấu Hình",
+  "description": "Quản lý cài đặt ứng dụng, tùy chọn và cấu hình của bạn. Tất cả thay đổi được lưu tự động.",
+  "profile": {
+    "title": "Cài Đặt Hồ Sơ",
+    "description": "Cập nhật thông tin cá nhân và chi tiết hồ sơ của bạn",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "email": "Địa Chỉ Email",
+    "bio": "Tiểu Sử",
+    "firstNamePlaceholder": "Nhập tên của bạn",
+    "lastNamePlaceholder": "Nhập họ của bạn",
+    "emailPlaceholder": "Nhập email của bạn",
+    "bioPlaceholder": "Hãy kể cho chúng tôi về bản thân..."
+  },
+  "notifications": {
+    "title": "Tùy Chọn Thông Báo",
+    "description": "Cấu hình cách và khi nào bạn nhận thông báo",
+    "emailNotifications": "Thông Báo Email",
+    "emailDescription": "Nhận cập nhật qua email",
+    "pushNotifications": "Thông Báo Push",
+    "pushDescription": "Nhận thông báo push trong trình duyệt của bạn",
+    "smsNotifications": "Thông Báo SMS",
+    "smsDescription": "Nhận cập nhật quan trọng qua SMS",
+    "enabled": "Đã Bật",
+    "disabled": "Đã Tắt"
+  },
+  "appearance": {
+    "title": "Giao Diện",
+    "description": "Tùy chỉnh giao diện và cảm nhận của ứng dụng",
+    "theme": "Chủ Đề",
+    "language": "Ngôn Ngữ",
+    "timezone": "Múi Giờ",
+    "themePlaceholder": "Chọn chủ đề",
+    "languagePlaceholder": "Chọn ngôn ngữ",
+    "timezonePlaceholder": "Chọn múi giờ",
+    "themes": {
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ Thống"
+    },
+    "languages": {
+      "en": "Tiếng Anh",
+      "es": "Tiếng Tây Ban Nha",
+      "fr": "Tiếng Pháp",
+      "de": "Tiếng Đức"
+    },
+    "timezones": {
+      "utc": "UTC",
+      "est": "Giờ Miền Đông",
+      "pst": "Giờ Miền Tây",
+      "cet": "Giờ Trung Âu"
+    }
+  },
+  "security": {
+    "title": "Bảo Mật & Quyền Riêng Tư",
+    "description": "Quản lý cài đặt bảo mật và tùy chọn quyền riêng tư của bạn",
+    "twoFactorAuth": "Xác Thực Hai Yếu Tố",
+    "twoFactorDescription": "Thêm một lớp bảo mật bổ sung cho tài khoản của bạn",
+    "loginNotifications": "Thông Báo Đăng Nhập",
+    "loginDescription": "Nhận thông báo khi ai đó đăng nhập vào tài khoản của bạn",
+    "dataExport": "Xuất Dữ Liệu",
+    "dataExportDescription": "Tải xuống bản sao dữ liệu của bạn",
+    "notEnabled": "Chưa Bật",
+    "export": "Xuất"
+  },
+  "api": {
+    "title": "API & Tích Hợp",
+    "description": "Quản lý khóa API và tích hợp bên thứ ba của bạn",
+    "apiKey": "Khóa API",
+    "apiKeyDescription": "Khóa API cá nhân của bạn để truy cập dịch vụ của chúng tôi",
+    "webhook": "URL Webhook",
+    "webhookPlaceholder": "https://your-domain.com/webhook",
+    "generateNew": "Tạo Mới"
+  },
+  "save": {
+    "saveChanges": "Lưu Thay Đổi",
+    "saving": "Đang lưu..."
+  }
+}

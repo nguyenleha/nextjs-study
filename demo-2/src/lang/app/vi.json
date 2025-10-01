@@ -1,0 +1,42 @@
+{
+  "home": {
+    "title": "Phát Triển Web Hiện Đại",
+    "subtitle": "Được Đơn Giản Hóa",
+    "description": "Một showcase của những thư viện phổ biến và mạnh mẽ nhất trong hệ sinh thái React, tất cả hoạt động mượt mà trong một ứng dụng Next.js.",
+    "badge": "Next.js với Các Thư Viện Phổ Biến",
+    "exploreDashboard": "Khám Phá Dashboard",
+    "tryForms": "Thử Forms",
+    "poweredBy": "Được Hỗ Trợ Bởi Các Nhà Lãnh Đạo Ngành",
+    "poweredByDescription": "Mỗi thư viện đã được lựa chọn cẩn thận vì hiệu suất, trải nghiệm nhà phát triển và hỗ trợ cộng đồng.",
+    "readyToBuild": "Sẵn Sàng Xây Dựng Điều Gì Đó Tuyệt Vời?",
+    "readyToBuildDescription": "Khám phá các phần khác nhau để xem từng thư viện hoạt động.",
+    "viewAnimations": "Xem Animations",
+    "seeCharts": "Xem Charts",
+    "features": {
+      "shadcn": {
+        "title": "shadcn/ui",
+        "description": "Các component đẹp, dễ tiếp cận được xây dựng với Radix UI và Tailwind CSS"
+      },
+      "framerMotion": {
+        "title": "Framer Motion",
+        "description": "Thư viện chuyển động sẵn sàng sản xuất cho React với animations mượt mà"
+      },
+      "reactHookForm": {
+        "title": "React Hook Form",
+        "description": "Forms hiệu suất cao, linh hoạt và có thể mở rộng với validation dễ dàng"
+      },
+      "zod": {
+        "title": "Zod",
+        "description": "Schema validation TypeScript-first với suy luận kiểu tĩnh"
+      },
+      "nextjs": {
+        "title": "Next.js 15",
+        "description": "Framework React cho sản xuất với App Router và Server Components"
+      },
+      "responsive": {
+        "title": "Thiết Kế Responsive",
+        "description": "Thiết kế mobile-first với Tailwind CSS và các tính năng CSS hiện đại"
+      }
+    }
+  }
+}

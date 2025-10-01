@@ -1,0 +1,19 @@
+{
+  "header": {
+    "brand": "Demo-2",
+    "navigation": {
+      "home": "Home",
+      "dashboard": "Dashboard", 
+      "forms": "Forms",
+      "animations": "Animations",
+      "charts": "Charts",
+      "settings": "Settings"
+    }
+  },
+  "themeSwitcher": {
+    "toggleTheme": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark", 
+    "system": "System"
+  }
+}

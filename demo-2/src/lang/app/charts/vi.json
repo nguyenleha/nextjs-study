@@ -1,0 +1,69 @@
+{
+  "title": "Trực Quan Hóa Dữ Liệu",
+  "subtitle": "Biểu Đồ",
+  "description": "Các component biểu đồ và trực quan hóa dữ liệu tương tác. Hoàn hảo cho dashboard và ứng dụng phân tích.",
+  "revenueTrend": {
+    "title": "Xu Hướng Doanh Thu",
+    "description": "Doanh thu hàng tháng trong 6 tháng qua",
+    "growth": "+18.5% so với kỳ trước",
+    "componentTitle": "Component Biểu Đồ Cột",
+    "componentDescription": "Tích hợp với Recharts, Chart.js hoặc D3.js"
+  },
+  "userDevices": {
+    "title": "Thiết Bị Người Dùng",
+    "description": "Phân bố người dùng theo loại thiết bị",
+    "componentTitle": "Component Biểu Đồ Tròn"
+  },
+  "performanceMetrics": {
+    "title": "Chỉ Số Hiệu Suất",
+    "description": "Các chỉ số hiệu suất chính theo thời gian",
+    "componentTitle": "Component Biểu Đồ Đường",
+    "componentDescription": "Hoàn hảo cho dữ liệu chuỗi thời gian"
+  },
+  "performanceDashboard": {
+    "title": "Dashboard Hiệu Suất",
+    "description": "Các chỉ số hiệu suất và KPI theo thời gian thực",
+    "pageLoad": "Tải Trang",
+    "apiResponse": "Phản Hồi API",
+    "uptime": "Thời Gian Hoạt Động",
+    "errorRate": "Tỷ Lệ Lỗi",
+    "target": "Mục Tiêu",
+    "aboveTarget": "✓ Trên Mục Tiêu",
+    "belowTarget": "⚠ Dưới Mục Tiêu"
+  },
+  "recommendedLibraries": {
+    "title": "Thư Viện Biểu Đồ Được Khuyến Nghị",
+    "description": "Các thư viện biểu đồ phổ biến và được duy trì tốt cho React",
+    "recharts": {
+      "title": "Recharts",
+      "description": "Thư viện biểu đồ có thể kết hợp được xây dựng trên React và D3",
+      "learnMore": "Tìm Hiểu Thêm"
+    },
+    "chartjs": {
+      "title": "Chart.js",
+      "description": "Biểu đồ đơn giản nhưng linh hoạt cho nhà thiết kế và nhà phát triển",
+      "learnMore": "Tìm Hiểu Thêm"
+    },
+    "d3js": {
+      "title": "D3.js",
+      "description": "Thư viện trực quan hóa dữ liệu mạnh mẽ với kiểm soát hoàn toàn",
+      "learnMore": "Tìm Hiểu Thêm"
+    }
+  },
+  "devices": {
+    "desktop": "Máy Tính",
+    "mobile": "Di Động",
+    "tablet": "Máy Tính Bảng"
+  },
+  "badges": {
+    "react": "React",
+    "d3": "D3",
+    "responsive": "Responsive",
+    "vanillaJs": "Vanilla JS",
+    "canvas": "Canvas",
+    "lightweight": "Nhẹ",
+    "advanced": "Nâng Cao",
+    "customizable": "Tùy Chỉnh",
+    "svg": "SVG"
+  }
+}

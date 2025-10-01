@@ -1,0 +1,40 @@
+{
+  "title": "Framer Motion",
+  "subtitle": "Animations",
+  "description": "Explore the power of Framer Motion with interactive animations, gestures, and smooth transitions.",
+  "pauseAll": "Pause All",
+  "playAll": "Play All",
+  "reset": "Reset",
+  "bounce": {
+    "title": "Bounce",
+    "description": "Smooth bouncing animation with infinite loop"
+  },
+  "rotate": {
+    "title": "Rotate",
+    "description": "360-degree rotation with linear easing"
+  },
+  "pulse": {
+    "title": "Pulse",
+    "description": "Scale animation that creates a pulsing effect"
+  },
+  "shake": {
+    "title": "Shake",
+    "description": "Horizontal shake with delay between cycles"
+  },
+  "float": {
+    "title": "Float",
+    "description": "Gentle floating motion with smooth easing"
+  },
+  "interactive": {
+    "title": "Interactive",
+    "description": "Hover to see the animation in action"
+  },
+  "gestureDemo": {
+    "title": "Gesture Demo",
+    "description": "Drag, scale, and rotate this card with your mouse or touch"
+  },
+  "badges": {
+    "continuous": "Continuous",
+    "hover": "Hover"
+  }
+}

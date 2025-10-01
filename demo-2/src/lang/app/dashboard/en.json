@@ -1,0 +1,49 @@
+{
+  "title": "Dashboard",
+  "welcome": "Welcome back! Here's what's happening with your business.",
+  "search": "Search",
+  "notifications": "Notifications",
+  "settings": "Settings",
+  "stats": {
+    "totalRevenue": "Total Revenue",
+    "subscriptions": "Subscriptions",
+    "sales": "Sales",
+    "activeNow": "Active Now",
+    "fromLastMonth": "from last month"
+  },
+  "revenueOverview": {
+    "title": "Revenue Overview",
+    "description": "Monthly revenue for the past 12 months",
+    "chartPlaceholder": "Chart visualization would go here",
+    "chartDescription": "Integrate with Chart.js, Recharts, or similar library"
+  },
+  "teamMembers": {
+    "title": "Team Members",
+    "description": "Your team's current status"
+  },
+  "recentOrders": {
+    "title": "Recent Orders",
+    "description": "Your latest orders and their status"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "description": "Common tasks and shortcuts",
+    "analytics": "Analytics",
+    "users": "Users",
+    "reports": "Reports",
+    "charts": "Charts"
+  },
+  "status": {
+    "completed": "completed",
+    "pending": "pending",
+    "processing": "processing",
+    "online": "online",
+    "away": "away",
+    "offline": "offline"
+  },
+  "periods": {
+    "7d": "7D",
+    "30d": "30D",
+    "90d": "90D"
+  }
+}

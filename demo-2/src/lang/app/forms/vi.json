@@ -1,0 +1,70 @@
+{
+  "title": "React Hook Form +",
+  "subtitle": "Zod",
+  "description": "Trải nghiệm sức mạnh của forms hiệu suất cao với validation an toàn kiểu. Được xây dựng với React Hook Form và Zod schema validation.",
+  "userRegistration": {
+    "title": "Form Đăng Ký Người Dùng",
+    "description": "Điền vào form bên dưới để tạo tài khoản của bạn. Tất cả các trường đều bắt buộc."
+  },
+  "personalInformation": {
+    "title": "Thông Tin Cá Nhân",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "firstNamePlaceholder": "Nhập tên của bạn",
+    "lastNamePlaceholder": "Nhập họ của bạn"
+  },
+  "contactInformation": {
+    "title": "Thông Tin Liên Hệ",
+    "email": "Địa Chỉ Email",
+    "phone": "Số Điện Thoại",
+    "emailPlaceholder": "Nhập email của bạn",
+    "phonePlaceholder": "Nhập số điện thoại của bạn"
+  },
+  "location": {
+    "title": "Vị Trí",
+    "country": "Quốc Gia",
+    "city": "Thành Phố",
+    "countryPlaceholder": "Chọn quốc gia của bạn",
+    "cityPlaceholder": "Nhập thành phố của bạn"
+  },
+  "additionalInformation": {
+    "title": "Thông Tin Bổ Sung",
+    "birthDate": "Ngày Sinh",
+    "bio": "Tiểu Sử",
+    "interests": "Sở Thích",
+    "bioPlaceholder": "Hãy kể cho chúng tôi về bản thân..."
+  },
+  "preferences": {
+    "title": "Tùy Chọn",
+    "newsletter": "Đăng ký nhận bản tin của chúng tôi",
+    "terms": "Tôi đồng ý với các điều khoản và điều kiện"
+  },
+  "submit": {
+    "submitForm": "Gửi Form",
+    "submitting": "Đang gửi...",
+    "success": "Form Đã Được Gửi Thành Công!",
+    "successDescription": "Cảm ơn bạn đã gửi. Chúng tôi sẽ liên hệ lại sớm.",
+    "submitAnother": "Gửi Form Khác"
+  },
+  "validation": {
+    "firstNameMin": "Tên phải có ít nhất 2 ký tự",
+    "lastNameMin": "Họ phải có ít nhất 2 ký tự",
+    "emailValid": "Vui lòng nhập địa chỉ email hợp lệ",
+    "phoneMin": "Số điện thoại phải có ít nhất 10 chữ số",
+    "countryRequired": "Vui lòng chọn quốc gia",
+    "cityMin": "Thành phố phải có ít nhất 2 ký tự",
+    "birthDateRequired": "Vui lòng chọn ngày sinh của bạn",
+    "bioMin": "Tiểu sử phải có ít nhất 10 ký tự",
+    "bioMax": "Tiểu sử phải ít hơn 500 ký tự",
+    "interestsMin": "Vui lòng chọn ít nhất một sở thích",
+    "termsRequired": "Bạn phải chấp nhận các điều khoản và điều kiện"
+  },
+  "countries": [
+    "Hoa Kỳ", "Canada", "Vương Quốc Anh", "Đức", "Pháp",
+    "Tây Ban Nha", "Ý", "Nhật Bản", "Hàn Quốc", "Úc", "Brazil", "Ấn Độ"
+  ],
+  "interests": [
+    "Công Nghệ", "Thiết Kế", "Kinh Doanh", "Giáo Dục", "Sức Khỏe",
+    "Thể Thao", "Âm Nhạc", "Nghệ Thuật", "Du Lịch", "Ẩm Thực", "Gaming", "Đọc Sách"
+  ]
+}

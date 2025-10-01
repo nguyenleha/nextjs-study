@@ -1,0 +1,19 @@
+{
+  "header": {
+    "brand": "Demo-2",
+    "navigation": {
+      "home": "Trang Chủ",
+      "dashboard": "Bảng Điều Khiển", 
+      "forms": "Biểu Mẫu",
+      "animations": "Hoạt Hình",
+      "charts": "Biểu Đồ",
+      "settings": "Cài Đặt"
+    }
+  },
+  "themeSwitcher": {
+    "toggleTheme": "Chuyển đổi chủ đề",
+    "light": "Sáng",
+    "dark": "Tối", 
+    "system": "Hệ Thống"
+  }
+}

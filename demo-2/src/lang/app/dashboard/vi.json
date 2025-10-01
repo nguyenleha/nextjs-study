@@ -1,0 +1,49 @@
+{
+  "title": "Dashboard",
+  "welcome": "Chào mừng trở lại! Đây là những gì đang xảy ra với doanh nghiệp của bạn.",
+  "search": "Tìm Kiếm",
+  "notifications": "Thông Báo",
+  "settings": "Cài Đặt",
+  "stats": {
+    "totalRevenue": "Tổng Doanh Thu",
+    "subscriptions": "Đăng Ký",
+    "sales": "Bán Hàng",
+    "activeNow": "Đang Hoạt Động",
+    "fromLastMonth": "từ tháng trước"
+  },
+  "revenueOverview": {
+    "title": "Tổng Quan Doanh Thu",
+    "description": "Doanh thu hàng tháng trong 12 tháng qua",
+    "chartPlaceholder": "Biểu đồ trực quan sẽ được hiển thị ở đây",
+    "chartDescription": "Tích hợp với Chart.js, Recharts hoặc thư viện tương tự"
+  },
+  "teamMembers": {
+    "title": "Thành Viên Nhóm",
+    "description": "Trạng thái hiện tại của nhóm bạn"
+  },
+  "recentOrders": {
+    "title": "Đơn Hàng Gần Đây",
+    "description": "Các đơn hàng mới nhất và trạng thái của chúng"
+  },
+  "quickActions": {
+    "title": "Hành Động Nhanh",
+    "description": "Các tác vụ và phím tắt thông thường",
+    "analytics": "Phân Tích",
+    "users": "Người Dùng",
+    "reports": "Báo Cáo",
+    "charts": "Biểu Đồ"
+  },
+  "status": {
+    "completed": "hoàn thành",
+    "pending": "chờ xử lý",
+    "processing": "đang xử lý",
+    "online": "trực tuyến",
+    "away": "vắng mặt",
+    "offline": "ngoại tuyến"
+  },
+  "periods": {
+    "7d": "7N",
+    "30d": "30N",
+    "90d": "90N"
+  }
+}

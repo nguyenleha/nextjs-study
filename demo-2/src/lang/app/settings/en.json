@@ -1,0 +1,81 @@
+{
+  "title": "Settings",
+  "subtitle": "& Configuration",
+  "description": "Manage your application settings, preferences, and configurations. All changes are saved automatically.",
+  "profile": {
+    "title": "Profile Settings",
+    "description": "Update your personal information and profile details",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "bio": "Bio",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNamePlaceholder": "Enter your last name",
+    "emailPlaceholder": "Enter your email",
+    "bioPlaceholder": "Tell us about yourself..."
+  },
+  "notifications": {
+    "title": "Notification Preferences",
+    "description": "Configure how and when you receive notifications",
+    "emailNotifications": "Email Notifications",
+    "emailDescription": "Receive updates via email",
+    "pushNotifications": "Push Notifications",
+    "pushDescription": "Receive push notifications in your browser",
+    "smsNotifications": "SMS Notifications",
+    "smsDescription": "Receive important updates via SMS",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "description": "Customize the look and feel of your application",
+    "theme": "Theme",
+    "language": "Language",
+    "timezone": "Timezone",
+    "themePlaceholder": "Select theme",
+    "languagePlaceholder": "Select language",
+    "timezonePlaceholder": "Select timezone",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "languages": {
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French",
+      "de": "German"
+    },
+    "timezones": {
+      "utc": "UTC",
+      "est": "Eastern Time",
+      "pst": "Pacific Time",
+      "cet": "Central European Time"
+    }
+  },
+  "security": {
+    "title": "Security & Privacy",
+    "description": "Manage your security settings and privacy preferences",
+    "twoFactorAuth": "Two-Factor Authentication",
+    "twoFactorDescription": "Add an extra layer of security to your account",
+    "loginNotifications": "Login Notifications",
+    "loginDescription": "Get notified when someone logs into your account",
+    "dataExport": "Data Export",
+    "dataExportDescription": "Download a copy of your data",
+    "notEnabled": "Not Enabled",
+    "export": "Export"
+  },
+  "api": {
+    "title": "API & Integrations",
+    "description": "Manage your API keys and third-party integrations",
+    "apiKey": "API Key",
+    "apiKeyDescription": "Your personal API key for accessing our services",
+    "webhook": "Webhook URL",
+    "webhookPlaceholder": "https://your-domain.com/webhook",
+    "generateNew": "Generate New"
+  },
+  "save": {
+    "saveChanges": "Save Changes",
+    "saving": "Saving..."
+  }
+}

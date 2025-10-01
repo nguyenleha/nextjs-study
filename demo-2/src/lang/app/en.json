@@ -1,0 +1,42 @@
+{
+  "home": {
+    "title": "Modern Web Development",
+    "subtitle": "Made Simple",
+    "description": "A showcase of the most popular and powerful libraries in the React ecosystem, all working together seamlessly in a Next.js application.",
+    "badge": "Next.js with Popular Libraries",
+    "exploreDashboard": "Explore Dashboard",
+    "tryForms": "Try Forms",
+    "poweredBy": "Powered by Industry Leaders",
+    "poweredByDescription": "Each library has been carefully selected for its performance, developer experience, and community support.",
+    "readyToBuild": "Ready to Build Something Amazing?",
+    "readyToBuildDescription": "Explore the different sections to see each library in action.",
+    "viewAnimations": "View Animations",
+    "seeCharts": "See Charts",
+    "features": {
+      "shadcn": {
+        "title": "shadcn/ui",
+        "description": "Beautiful, accessible components built with Radix UI and Tailwind CSS"
+      },
+      "framerMotion": {
+        "title": "Framer Motion",
+        "description": "Production-ready motion library for React with smooth animations"
+      },
+      "reactHookForm": {
+        "title": "React Hook Form",
+        "description": "Performant, flexible and extensible forms with easy validation"
+      },
+      "zod": {
+        "title": "Zod",
+        "description": "TypeScript-first schema validation with static type inference"
+      },
+      "nextjs": {
+        "title": "Next.js 15",
+        "description": "The React framework for production with App Router and Server Components"
+      },
+      "responsive": {
+        "title": "Responsive Design",
+        "description": "Mobile-first design with Tailwind CSS and modern CSS features"
+      }
+    }
+  }
+}

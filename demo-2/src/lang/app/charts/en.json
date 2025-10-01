@@ -1,0 +1,69 @@
+{
+  "title": "Data Visualization",
+  "subtitle": "Charts",
+  "description": "Interactive charts and data visualization components. Perfect for dashboards and analytics applications.",
+  "revenueTrend": {
+    "title": "Revenue Trend",
+    "description": "Monthly revenue over the past 6 months",
+    "growth": "+18.5% vs last period",
+    "componentTitle": "Bar Chart Component",
+    "componentDescription": "Integrate with Recharts, Chart.js, or D3.js"
+  },
+  "userDevices": {
+    "title": "User Devices",
+    "description": "Distribution of users by device type",
+    "componentTitle": "Pie Chart Component"
+  },
+  "performanceMetrics": {
+    "title": "Performance Metrics",
+    "description": "Key performance indicators over time",
+    "componentTitle": "Line Chart Component",
+    "componentDescription": "Perfect for time-series data"
+  },
+  "performanceDashboard": {
+    "title": "Performance Dashboard",
+    "description": "Real-time performance metrics and KPIs",
+    "pageLoad": "Page Load",
+    "apiResponse": "API Response",
+    "uptime": "Uptime",
+    "errorRate": "Error Rate",
+    "target": "Target",
+    "aboveTarget": "✓ Above Target",
+    "belowTarget": "⚠ Below Target"
+  },
+  "recommendedLibraries": {
+    "title": "Recommended Chart Libraries",
+    "description": "Popular and well-maintained charting libraries for React",
+    "recharts": {
+      "title": "Recharts",
+      "description": "Composable charting library built on React and D3",
+      "learnMore": "Learn More"
+    },
+    "chartjs": {
+      "title": "Chart.js",
+      "description": "Simple yet flexible charting for designers and developers",
+      "learnMore": "Learn More"
+    },
+    "d3js": {
+      "title": "D3.js",
+      "description": "Powerful data visualization library with complete control",
+      "learnMore": "Learn More"
+    }
+  },
+  "devices": {
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "tablet": "Tablet"
+  },
+  "badges": {
+    "react": "React",
+    "d3": "D3",
+    "responsive": "Responsive",
+    "vanillaJs": "Vanilla JS",
+    "canvas": "Canvas",
+    "lightweight": "Lightweight",
+    "advanced": "Advanced",
+    "customizable": "Customizable",
+    "svg": "SVG"
+  }
+}

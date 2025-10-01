@@ -1,0 +1,70 @@
+{
+  "title": "React Hook Form +",
+  "subtitle": "Zod",
+  "description": "Experience the power of performant forms with type-safe validation. Built with React Hook Form and Zod schema validation.",
+  "userRegistration": {
+    "title": "User Registration Form",
+    "description": "Fill out the form below to create your account. All fields are required."
+  },
+  "personalInformation": {
+    "title": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastNamePlaceholder": "Enter your last name"
+  },
+  "contactInformation": {
+    "title": "Contact Information",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "emailPlaceholder": "Enter your email",
+    "phonePlaceholder": "Enter your phone number"
+  },
+  "location": {
+    "title": "Location",
+    "country": "Country",
+    "city": "City",
+    "countryPlaceholder": "Select your country",
+    "cityPlaceholder": "Enter your city"
+  },
+  "additionalInformation": {
+    "title": "Additional Information",
+    "birthDate": "Birth Date",
+    "bio": "Bio",
+    "interests": "Interests",
+    "bioPlaceholder": "Tell us about yourself..."
+  },
+  "preferences": {
+    "title": "Preferences",
+    "newsletter": "Subscribe to our newsletter",
+    "terms": "I agree to the terms and conditions"
+  },
+  "submit": {
+    "submitForm": "Submit Form",
+    "submitting": "Submitting...",
+    "success": "Form Submitted Successfully!",
+    "successDescription": "Thank you for your submission. We'll get back to you soon.",
+    "submitAnother": "Submit Another Form"
+  },
+  "validation": {
+    "firstNameMin": "First name must be at least 2 characters",
+    "lastNameMin": "Last name must be at least 2 characters",
+    "emailValid": "Please enter a valid email address",
+    "phoneMin": "Phone number must be at least 10 digits",
+    "countryRequired": "Please select a country",
+    "cityMin": "City must be at least 2 characters",
+    "birthDateRequired": "Please select your birth date",
+    "bioMin": "Bio must be at least 10 characters",
+    "bioMax": "Bio must be less than 500 characters",
+    "interestsMin": "Please select at least one interest",
+    "termsRequired": "You must accept the terms and conditions"
+  },
+  "countries": [
+    "United States", "Canada", "United Kingdom", "Germany", "France",
+    "Spain", "Italy", "Japan", "South Korea", "Australia", "Brazil", "India"
+  ],
+  "interests": [
+    "Technology", "Design", "Business", "Education", "Health",
+    "Sports", "Music", "Art", "Travel", "Food", "Gaming", "Reading"
+  ]
+}

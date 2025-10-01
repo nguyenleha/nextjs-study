@@ -1,0 +1,40 @@
+{
+  "title": "Framer Motion",
+  "subtitle": "Animations",
+  "description": "Khám phá sức mạnh của Framer Motion với animations tương tác, cử chỉ và chuyển tiếp mượt mà.",
+  "pauseAll": "Tạm Dừng Tất Cả",
+  "playAll": "Phát Tất Cả",
+  "reset": "Đặt Lại",
+  "bounce": {
+    "title": "Nảy",
+    "description": "Animation nảy mượt mà với vòng lặp vô hạn"
+  },
+  "rotate": {
+    "title": "Xoay",
+    "description": "Xoay 360 độ với easing tuyến tính"
+  },
+  "pulse": {
+    "title": "Nhịp Đập",
+    "description": "Animation scale tạo hiệu ứng nhịp đập"
+  },
+  "shake": {
+    "title": "Lắc",
+    "description": "Lắc ngang với độ trễ giữa các chu kỳ"
+  },
+  "float": {
+    "title": "Nổi",
+    "description": "Chuyển động nổi nhẹ nhàng với easing mượt mà"
+  },
+  "interactive": {
+    "title": "Tương Tác",
+    "description": "Hover để xem animation hoạt động"
+  },
+  "gestureDemo": {
+    "title": "Demo Cử Chỉ",
+    "description": "Kéo, phóng to và xoay thẻ này bằng chuột hoặc cảm ứng"
+  },
+  "badges": {
+    "continuous": "Liên Tục",
+    "hover": "Hover"
+  }
+}
