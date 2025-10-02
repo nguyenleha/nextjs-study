@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/libs/utils'
 import { Button } from '@/components/ui/button'
-import { ThemeSwitcher } from '@/components/theme-switcher'
+import { ThemeSwitcher } from '@/components/shared/theme-switcher'
 import { Home, LayoutDashboard, FormInput, Palette, BarChart3, Settings } from 'lucide-react'
+import { LocaleSwitcher } from './locale-switcher'
 
 export function Header() {
     const pathname = usePathname()
@@ -51,6 +52,7 @@ export function Header() {
                         </Button>
                     </div>
                     <nav className="flex items-center space-x-2">
+                        <LocaleSwitcher />
                         <ThemeSwitcher />
                     </nav>
                 </div>

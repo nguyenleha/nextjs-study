@@ -23,6 +23,7 @@ import {
     // Upload
 } from 'lucide-react'
 import { useState } from 'react'
+import { LocaleSwitcher } from '@/components/shared/locale-switcher'
 
 export default function SettingsPage() {
     const [isSaving, setIsSaving] = useState(false)
@@ -152,17 +153,7 @@ export default function SettingsPage() {
                                     </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="language">Language</Label>
-                                        <Select>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select language" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="en">English</SelectItem>
-                                                <SelectItem value="es">Spanish</SelectItem>
-                                                <SelectItem value="fr">French</SelectItem>
-                                                <SelectItem value="de">German</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <LocaleSwitcher />
                                     </div>
                                 </div>
                                 <div className="space-y-2">

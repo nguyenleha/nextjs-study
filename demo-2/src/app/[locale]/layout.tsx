@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
-import { Header } from '@/components/header'
+import { ThemeProvider } from '@/components/shared/theme-provider'
+import { Header } from '@/components/shared/header'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/libs/I18nRouting'
@@ -39,19 +39,19 @@ export default async function RootLayout(props: { children: React.ReactNode; par
     }
     setRequestLocale(locale)
     return (
-        <html lang={locale} suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                    <div className="relative flex min-h-screen flex-col">
-                        <Header />
-                        <main className="flex-1">
-                            <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            <html lang={locale} suppressHydrationWarning>
+                <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                        <div className="relative flex min-h-screen flex-col">
+                            <Header />
+                            <main className="flex-1">
                                 {props.children}
-                            </NextIntlClientProvider>
-                        </main>
-                    </div>
-                </ThemeProvider>
-            </body>
-        </html>
+                            </main>
+                        </div>
+                    </ThemeProvider>
+                </body>
+            </html>
+        </NextIntlClientProvider>
     )
 }
