@@ -43,7 +43,7 @@ export default async function RootLayout(props: { children: React.ReactNode; par
         <NextIntlClientProvider locale={locale} messages={messages}>
             <html lang={locale} suppressHydrationWarning>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange themes={['light', 'dark', 'blue', 'green', 'purple', 'orange', 'system']}>
                         <LayoutContent>{props.children}</LayoutContent>
                     </ThemeProvider>
                 </body>
