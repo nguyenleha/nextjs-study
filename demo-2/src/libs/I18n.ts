@@ -17,6 +17,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     const dashboardMessages = await import(`../lang/app/dashboard/${locale}.json`).catch(() => ({ default: {} }))
     const formsMessages = await import(`../lang/app/forms/${locale}.json`).catch(() => ({ default: {} }))
     const settingsMessages = await import(`../lang/app/settings/${locale}.json`).catch(() => ({ default: {} }))
+    const authMessages = await import(`../lang/app/auth/${locale}.json`).catch(() => ({ default: {} }))
 
     return {
         locale,
@@ -28,6 +29,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
             forms: formsMessages.default,
             settings: settingsMessages.default,
             component: componentMessages.default,
+            auth: authMessages.default,
         },
     }
 })

@@ -22,5 +22,10 @@
             "vi": "Vietnamese",
             "en": "English"
         }
+    },
+    "sidebar": {
+        "authSection": "Authentication",
+        "signIn": "Sign In",
+        "signUp": "Sign Up"
     }
 }

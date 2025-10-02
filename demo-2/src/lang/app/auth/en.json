@@ -1,0 +1,42 @@
+{
+    "signIn": {
+        "title": "Sign In",
+        "description": "Enter your email and password to access your account",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "submitButton": "Sign In",
+        "submittingButton": "Signing in...",
+        "noAccount": "Don't have an account?",
+        "signUpLink": "Sign up",
+        "forgotPassword": "Forgot your password?"
+    },
+    "signUp": {
+        "title": "Sign Up",
+        "description": "Create an account to get started",
+        "name": "Full Name",
+        "namePlaceholder": "Enter your full name",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your password",
+        "submitButton": "Sign Up",
+        "submittingButton": "Creating account...",
+        "haveAccount": "Already have an account?",
+        "signInLink": "Sign in",
+        "termsText": "By signing up, you agree to our",
+        "termsLink": "Terms of Service",
+        "and": "and",
+        "privacyLink": "Privacy Policy"
+    },
+    "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "emailInvalid": "Invalid email address",
+        "passwordMin": "Password must be at least 6 characters",
+        "confirmPasswordRequired": "Password confirmation is required",
+        "passwordsMismatch": "Passwords don't match"
+    }
+}

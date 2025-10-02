@@ -1,0 +1,42 @@
+{
+    "signIn": {
+        "title": "Đăng Nhập",
+        "description": "Nhập email và mật khẩu để truy cập tài khoản của bạn",
+        "email": "Email",
+        "emailPlaceholder": "Nhập email của bạn",
+        "password": "Mật Khẩu",
+        "passwordPlaceholder": "Nhập mật khẩu của bạn",
+        "submitButton": "Đăng Nhập",
+        "submittingButton": "Đang đăng nhập...",
+        "noAccount": "Chưa có tài khoản?",
+        "signUpLink": "Đăng ký",
+        "forgotPassword": "Quên mật khẩu?"
+    },
+    "signUp": {
+        "title": "Đăng Ký",
+        "description": "Tạo tài khoản để bắt đầu",
+        "name": "Họ và Tên",
+        "namePlaceholder": "Nhập họ và tên của bạn",
+        "email": "Email",
+        "emailPlaceholder": "Nhập email của bạn",
+        "password": "Mật Khẩu",
+        "passwordPlaceholder": "Nhập mật khẩu của bạn",
+        "confirmPassword": "Xác Nhận Mật Khẩu",
+        "confirmPasswordPlaceholder": "Xác nhận mật khẩu của bạn",
+        "submitButton": "Đăng Ký",
+        "submittingButton": "Đang tạo tài khoản...",
+        "haveAccount": "Đã có tài khoản?",
+        "signInLink": "Đăng nhập",
+        "termsText": "Bằng cách đăng ký, bạn đồng ý với",
+        "termsLink": "Điều Khoản Dịch Vụ",
+        "and": "và",
+        "privacyLink": "Chính Sách Bảo Mật"
+    },
+    "validation": {
+        "nameMin": "Tên phải có ít nhất 2 ký tự",
+        "emailInvalid": "Địa chỉ email không hợp lệ",
+        "passwordMin": "Mật khẩu phải có ít nhất 6 ký tự",
+        "confirmPasswordRequired": "Yêu cầu xác nhận mật khẩu",
+        "passwordsMismatch": "Mật khẩu không khớp"
+    }
+}

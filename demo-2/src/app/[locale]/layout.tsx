@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import '@/app/globals.css'
 import { ThemeProvider } from '@/components/shared/theme-provider'
 import { Header } from '@/components/shared/header'
+import { Sidebar } from '@/components/shared/sidebar'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { routing } from '@/libs/I18nRouting'
@@ -43,15 +44,29 @@ export default async function RootLayout(props: { children: React.ReactNode; par
             <html lang={locale} suppressHydrationWarning>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-                        <div className="relative flex min-h-screen flex-col">
-                            <Header />
-                            <main className="flex-1">
-                                {props.children}
-                            </main>
-                        </div>
+                        <LayoutContent>{props.children}</LayoutContent>
                     </ThemeProvider>
                 </body>
             </html>
         </NextIntlClientProvider>
+    )
+}
+
+function LayoutContent({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="relative flex min-h-screen">
+            {/* Desktop Sidebar - Luôn ẩn trên mobile */}
+            <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out" id="desktop-sidebar">
+                <div className="flex-1 flex flex-col min-h-0 border-r bg-background">
+                    <Sidebar />
+                </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="flex flex-col flex-1 md:pl-64 transition-all duration-300 ease-in-out" id="main-content">
+                <Header />
+                <main className="flex-1 p-4 md:p-6">{children}</main>
+            </div>
+        </div>
     )
 }

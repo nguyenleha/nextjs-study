@@ -22,5 +22,10 @@
             "vi": "Tiếng Việt",
             "en": "Tiếng Anh"
         }
+    },
+    "sidebar": {
+        "authSection": "Xác Thực",
+        "signIn": "Đăng Nhập",
+        "signUp": "Đăng Ký"
     }
 }
