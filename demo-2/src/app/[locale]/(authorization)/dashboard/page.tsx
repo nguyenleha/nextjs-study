@@ -23,6 +23,10 @@ import {
     Search,
 } from 'lucide-react'
 import { useState } from 'react'
+import avatarImage2 from '@/assets/avatars/avatar-thumb-002.webp'
+import avatarImage3 from '@/assets/avatars/avatar-thumb-003.webp'
+import avatarImage4 from '@/assets/avatars/avatar-thumb-004.webp'
+import avatarImage5 from '@/assets/avatars/avatar-thumb-005.webp'
 
 const stats = [
     {
@@ -98,25 +102,25 @@ const teamMembers = [
     {
         name: 'John Doe',
         role: 'CEO',
-        avatar: '/avatars/john.jpg',
+        avatar: avatarImage2.src,
         status: 'online',
     },
     {
         name: 'Jane Smith',
         role: 'CTO',
-        avatar: '/avatars/jane.jpg',
+        avatar: avatarImage3.src,
         status: 'away',
     },
     {
         name: 'Bob Johnson',
         role: 'Designer',
-        avatar: '/avatars/bob.jpg',
+        avatar: avatarImage4.src,
         status: 'offline',
     },
     {
         name: 'Alice Brown',
         role: 'Developer',
-        avatar: '/avatars/alice.jpg',
+        avatar: avatarImage5.src,
         status: 'online',
     },
 ]

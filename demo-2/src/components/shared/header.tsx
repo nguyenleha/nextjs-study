@@ -8,6 +8,7 @@ import { User, LogOut, Settings } from 'lucide-react'
 import { LocaleSwitcher } from './locale-switcher'
 import { MobileSidebar } from './sidebar'
 import { SidebarToggle } from './sidebar-toggle'
+import avatarImage from '@/assets/avatars/avatar-thumb-001.webp'
 
 export function Header() {
     return (
@@ -22,7 +23,7 @@ export function Header() {
                         <DropdownMenuTrigger asChild>
                             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                                 <Avatar className="h-8 w-8">
-                                    <AvatarImage src="/avatars/01.png" alt="@admin" />
+                                    <AvatarImage src={avatarImage.src} alt="@admin" />
                                     <AvatarFallback>AD</AvatarFallback>
                                 </Avatar>
                             </Button>
