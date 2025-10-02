@@ -31,7 +31,7 @@ export function Sidebar({ className }: SidebarProps) {
             name: t('header.navigation.dashboard'),
             href: '/dashboard',
             icon: LayoutDashboard,
-            isOpen: true,
+            isOpen: false,
             subItems: [
                 { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
                 { name: 'Reports', href: '/dashboard/reports', icon: FormInput },
@@ -42,11 +42,10 @@ export function Sidebar({ className }: SidebarProps) {
             name: t('header.navigation.forms'),
             href: '/forms',
             icon: FormInput,
-            isOpen: true,
+            isOpen: false,
             subItems: [
                 { name: 'Basic Forms', href: '/forms/basic', icon: FormInput },
                 { name: 'Advanced Forms', href: '/forms/advanced', icon: Settings },
-                { name: t('header.navigation.charts'), href: '/charts', icon: BarChart3 },
             ],
         },
         { name: t('header.navigation.animations'), href: '/animations', icon: Palette },
@@ -65,8 +64,7 @@ export function Sidebar({ className }: SidebarProps) {
                 { name: t('sidebar.signUp'), href: '/sign-up', icon: UserPlus },
             ],
         },
-        { name: t('sidebar.signIn'), href: '/sign-in', icon: LogIn },
-        { name: t('sidebar.signUp'), href: '/sign-up', icon: UserPlus },
+        { name: t('header.navigation.settings'), href: '/settings', icon: Settings },
     ]
 
     const [openDropdowns, setOpenDropdowns] = useState<Set<string>>(new Set())
