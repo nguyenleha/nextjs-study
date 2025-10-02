@@ -57,7 +57,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
         <div className="relative flex min-h-screen">
             {/* Desktop Sidebar - Luôn ẩn trên mobile */}
             <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out" id="desktop-sidebar">
-                <div className="flex-1 flex flex-col min-h-0 border-r bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+                <div className="flex-1 flex flex-col min-h-0 border-r bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
                     <Sidebar />
                 </div>
             </div>

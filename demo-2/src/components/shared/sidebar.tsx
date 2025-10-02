@@ -52,15 +52,6 @@ export function Sidebar({ className }: SidebarProps) {
         { name: t('header.navigation.animations'), href: '/animations', icon: Palette },
         { name: t('header.navigation.charts'), href: '/charts', icon: BarChart3 },
         { name: t('header.navigation.settings'), href: '/settings', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings22', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings33', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings44', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings55', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings66', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings77', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings88', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings99', icon: Settings },
-        { name: t('header.navigation.settings'), href: '/settings100', icon: Settings },
     ]
 
     const authNavigation = [
@@ -156,7 +147,7 @@ export function Sidebar({ className }: SidebarProps) {
 
     return (
         <div className={cn('h-full flex flex-col', className)}>
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto scrollbar-hide">
                 <div className="space-y-4 py-4">
                     <div className="px-3 py-2">
                         <div className="space-y-1">
