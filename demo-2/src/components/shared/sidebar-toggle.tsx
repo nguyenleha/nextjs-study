@@ -7,25 +7,46 @@ import { Menu, AlignLeft } from 'lucide-react'
 export function SidebarToggle() {
     const [isOpen, setIsOpen] = useState(true)
 
+    // Effect riêng để xử lý mobile - đảm bảo sidebar luôn đóng trên mobile
+    useEffect(() => {
+        const handleMobileSidebar = () => {
+            const sidebar = document.getElementById('desktop-sidebar')
+            const mainContent = document.getElementById('main-content')
+
+            if (sidebar && mainContent) {
+                if (window.innerWidth < 768) {
+                    // Force ẩn sidebar trên mobile
+                    sidebar.style.display = 'none'
+                    sidebar.classList.add('hidden')
+                    sidebar.classList.remove('md:flex')
+                    mainContent.classList.remove('md:pl-64')
+                    mainContent.style.paddingLeft = '0'
+                }
+            }
+        }
+
+        // Chạy ngay lập tức
+        handleMobileSidebar()
+
+        // Lắng nghe resize
+        window.addEventListener('resize', handleMobileSidebar)
+
+        return () => {
+            window.removeEventListener('resize', handleMobileSidebar)
+        }
+    }, [])
+
     useEffect(() => {
         const sidebar = document.getElementById('desktop-sidebar')
         const mainContent = document.getElementById('main-content')
 
         const updateSidebar = () => {
             if (sidebar && mainContent) {
-                // Luôn ẩn sidebar trên mobile (< 768px)
-                if (window.innerWidth < 768) {
-                    sidebar.classList.add('hidden')
-                    sidebar.classList.remove('md:flex')
-                    sidebar.style.transform = ''
-                    sidebar.style.transition = ''
-                    mainContent.classList.remove('md:pl-64')
-                    mainContent.style.paddingLeft = ''
-                    mainContent.style.transition = ''
-                } else {
-                    // Chỉ áp dụng toggle trên desktop (>= 768px)
+                // Chỉ xử lý desktop (>= 768px), mobile đã được xử lý ở useEffect khác
+                if (window.innerWidth >= 768) {
                     sidebar.classList.remove('hidden')
                     sidebar.classList.add('md:flex')
+                    sidebar.style.display = 'flex'
 
                     // Đảm bảo có transition và overflow hidden
                     sidebar.style.transition = 'all 0.3s ease-in-out'
@@ -34,7 +55,6 @@ export function SidebarToggle() {
 
                     if (isOpen) {
                         // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
-                        sidebar.style.display = 'flex'
                         sidebar.style.width = '5rem' // 80px = 5rem (12+12+32+12+12)
                         sidebar.style.transform = 'translateX(0)'
                         // Force reflow để đảm bảo width được áp dụng trước
@@ -54,16 +74,21 @@ export function SidebarToggle() {
 
         // Reset state về true khi chuyển từ mobile sang desktop
         const handleResize = () => {
-            const wasDesktop = window.innerWidth >= 768
-            if (wasDesktop && !isOpen) {
-                // Có thể reset về true nếu muốn sidebar luôn mở khi chuyển sang desktop
-                // setIsOpen(true)
+            const isDesktop = window.innerWidth >= 768
+            if (isDesktop && !isOpen) {
+                // Reset về true khi chuyển sang desktop để sidebar mở mặc định
+                setIsOpen(true)
             }
-            updateSidebar()
+            // Chỉ update sidebar trên desktop
+            if (isDesktop) {
+                updateSidebar()
+            }
         }
 
-        // Cập nhật khi component mount và khi isOpen thay đổi
-        updateSidebar()
+        // Cập nhật khi component mount và khi isOpen thay đổi (chỉ trên desktop)
+        if (window.innerWidth >= 768) {
+            updateSidebar()
+        }
 
         // Lắng nghe sự kiện resize để cập nhật khi thay đổi kích thước màn hình
         window.addEventListener('resize', handleResize)

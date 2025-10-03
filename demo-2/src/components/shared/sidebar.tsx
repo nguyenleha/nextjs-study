@@ -185,19 +185,23 @@ export function Sidebar({ className }: SidebarProps) {
 
     return (
         <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed}>
+            {/* Brand section - cố định ở trên cùng */}
+            <div className="flex-shrink-0 px-3 py-4">
+                <Link href="/" className="flex items-center px-3">
+                    <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
+                        <div className="h-8 w-8 rounded bg-primary"></div>
+                    </div>
+                    <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                        <span className="ml-2 text-lg font-bold text-nowrap">{t('header.brand')}</span>
+                    </div>
+                </Link>
+            </div>
+
+            {/* Navigation section - có thể scroll */}
             <div className="flex-1 overflow-y-auto scrollbar-hide">
                 <div className="space-y-4 py-4">
                     <div className="px-3 py-2">
                         <div className="space-y-1">
-                            <Link href="/" className="flex items-center px-3 py-2 mb-6">
-                                <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
-                                    <div className="h-8 w-8 rounded bg-primary"></div>
-                                </div>
-                                <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
-                                    <span className="ml-2 text-lg font-bold text-nowrap">{t('header.brand')}</span>
-                                </div>
-                            </Link>
-
                             {navigation.map((item) => renderNavigationItem(item))}
 
                             <div className="pt-4 mt-4 border-t">
