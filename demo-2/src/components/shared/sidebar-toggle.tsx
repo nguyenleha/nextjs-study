@@ -27,23 +27,24 @@ export function SidebarToggle() {
                     sidebar.classList.remove('hidden')
                     sidebar.classList.add('md:flex')
 
-                    // Đảm bảo có transition
+                    // Đảm bảo có transition và overflow hidden
                     sidebar.style.transition = 'all 0.3s ease-in-out'
+                    sidebar.style.overflow = 'hidden'
                     mainContent.style.transition = 'padding-left 0.3s ease-in-out'
 
                     if (isOpen) {
-                        // Sidebar hiển thị với hiệu ứng smooth
+                        // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
                         sidebar.style.display = 'flex'
-                        // Đặt transform về -100% trước, sau đó animate về 0
-                        sidebar.style.transform = 'translateX(-100%)'
-                        // Force reflow để đảm bảo transform được áp dụng trước
-                        sidebar.offsetHeight
+                        sidebar.style.width = '0'
                         sidebar.style.transform = 'translateX(0)'
+                        // Force reflow để đảm bảo width được áp dụng trước
+                        void sidebar.offsetHeight
+                        sidebar.style.width = '16rem' // 256px = 16rem
                         mainContent.classList.add('md:pl-64')
                         mainContent.style.paddingLeft = '16rem' // 256px = 16rem
                     } else {
-                        // Sidebar ẩn với hiệu ứng smooth
-                        sidebar.style.transform = 'translateX(-100%)'
+                        // Sidebar ẩn với hiệu ứng smooth (thu gọn)
+                        sidebar.style.width = '0'
                         mainContent.classList.remove('md:pl-64')
                         mainContent.style.paddingLeft = '0'
 

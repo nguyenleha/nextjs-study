@@ -151,7 +151,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <div className="space-y-1">
                             <Link href="/" className="flex items-center space-x-3 px-3 py-2 mb-6">
                                 <div className="h-8 w-8 rounded bg-primary"></div>
-                                <span className="text-lg font-bold">{t('header.brand')}</span>
+                                <span className="text-lg font-bold text-nowrap">{t('header.brand')}</span>
                             </Link>
 
                             {navigation.map((item) => renderNavigationItem(item))}
