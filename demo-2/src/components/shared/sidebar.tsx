@@ -6,6 +6,7 @@ import { cn } from '@/libs/utils'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { VisuallyHidden } from '@/components/ui/visually-hidden'
+import { useSidebarConfig } from '@/libs/sidebar-config'
 import { Home, LayoutDashboard, FormInput, Palette, BarChart3, Settings, Menu, LogIn, UserPlus, ChevronRight, type LucideIcon } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
@@ -24,7 +25,8 @@ interface NavigationItem {
 export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname()
     const t = useTranslations('component')
-    const [isCollapsed, setIsCollapsed] = useState(true)
+    const { isOpen } = useSidebarConfig()
+    const [isCollapsed, setIsCollapsed] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
     // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed
@@ -34,12 +36,15 @@ export function Sidebar({ className }: SidebarProps) {
             if (sidebar) {
                 const computedStyle = window.getComputedStyle(sidebar)
                 const width = computedStyle.width
-                setIsCollapsed(width === '80px' || width === '5rem')
+                const collapsed = width === '80px' || width === '5rem'
+                setIsCollapsed(collapsed)
             }
         }
 
-        // Kiểm tra trạng thái ban đầu
-        handleResize()
+        // Delay để đảm bảo sidebar đã được render
+        const timeoutId = setTimeout(() => {
+            handleResize()
+        }, 100)
 
         // Lắng nghe sự kiện resize
         window.addEventListener('resize', handleResize)
@@ -51,6 +56,7 @@ export function Sidebar({ className }: SidebarProps) {
         }
 
         return () => {
+            clearTimeout(timeoutId)
             window.removeEventListener('resize', handleResize)
             if (sidebar) {
                 sidebar.removeEventListener('transitionend', handleResize)
@@ -126,7 +132,7 @@ export function Sidebar({ className }: SidebarProps) {
         const allItems = [...navigation, ...authNavigation]
         const initialOpenItems = getInitialOpenDropdowns(allItems)
         setOpenDropdowns(initialOpenItems)
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [])
 
     const toggleDropdown = (itemName: string) => {
         setOpenDropdowns((prev) => {
@@ -143,16 +149,16 @@ export function Sidebar({ className }: SidebarProps) {
     const isDropdownOpen = (itemName: string) => openDropdowns.has(itemName)
 
     // Logic để xác định sidebar có đang expand không
-    // Khi hover vào sidebar, nó sẽ expand thực sự
-    const isExpanded = isHovered || !isCollapsed
+    // Ưu tiên isOpen từ config, sau đó là hover, cuối cùng là !isCollapsed
+    const isExpanded = isOpen || isHovered || !isCollapsed
 
-    // Effect để xử lý hover expand sidebar
+    // Effect để xử lý hover expand sidebar và config state
     useEffect(() => {
         const sidebar = document.getElementById('desktop-sidebar')
         const mainContent = document.getElementById('main-content')
 
         if (sidebar && mainContent) {
-            if (isHovered) {
+            if (isOpen || isHovered) {
                 // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
                 sidebar.style.width = '5rem' // 80px = 5rem
                 sidebar.style.transform = 'translateX(0)'
@@ -168,7 +174,7 @@ export function Sidebar({ className }: SidebarProps) {
                 mainContent.style.paddingLeft = '5rem' // 80px = 5rem
             }
         }
-    }, [isHovered])
+    }, [isHovered, isOpen])
 
     const renderNavigationItem = (item: NavigationItem, level: number = 0) => {
         const Icon = item.icon
