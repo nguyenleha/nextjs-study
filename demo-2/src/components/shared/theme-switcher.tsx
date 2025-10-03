@@ -11,11 +11,27 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 export function ThemeSwitcher() {
     const { setTheme, theme } = useTheme()
     const t = useTranslations('component')
+    const [mounted, setMounted] = React.useState(false)
+
+    // Prevent hydration mismatch
+    React.useEffect(() => {
+        setMounted(true)
+    }, [])
 
     const getThemeIcon = () => {
+        if (!mounted) return <Palette className="h-[1.2rem] w-[1.2rem]" />
         if (theme === 'dark') return <Moon className="h-[1.2rem] w-[1.2rem]" />
         if (theme === 'light') return <Sun className="h-[1.2rem] w-[1.2rem]" />
         return <Palette className="h-[1.2rem] w-[1.2rem]" />
+    }
+
+    if (!mounted) {
+        return (
+            <Button variant="outline" size="icon">
+                <Palette className="h-[1.2rem] w-[1.2rem]" />
+                <span className="sr-only">Loading theme...</span>
+            </Button>
+        )
     }
 
     return (
