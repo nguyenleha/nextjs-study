@@ -24,6 +24,38 @@ interface NavigationItem {
 export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname()
     const t = useTranslations('component')
+    const [isCollapsed, setIsCollapsed] = useState(false)
+
+    // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed
+    useEffect(() => {
+        const handleResize = () => {
+            const sidebar = document.getElementById('desktop-sidebar')
+            if (sidebar) {
+                const computedStyle = window.getComputedStyle(sidebar)
+                const width = computedStyle.width
+                setIsCollapsed(width === '80px' || width === '5rem')
+            }
+        }
+
+        // Kiểm tra trạng thái ban đầu
+        handleResize()
+
+        // Lắng nghe sự kiện resize
+        window.addEventListener('resize', handleResize)
+
+        // Lắng nghe sự kiện transitionend để cập nhật trạng thái sau animation
+        const sidebar = document.getElementById('desktop-sidebar')
+        if (sidebar) {
+            sidebar.addEventListener('transitionend', handleResize)
+        }
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+            if (sidebar) {
+                sidebar.removeEventListener('transitionend', handleResize)
+            }
+        }
+    }, [])
 
     const navigation: NavigationItem[] = [
         { name: t('header.navigation.home'), href: '/', icon: Home },
@@ -118,23 +150,31 @@ export function Sidebar({ className }: SidebarProps) {
         return (
             <div key={item.name} className="space-y-1">
                 {hasSubItems ? (
-                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-between', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => toggleDropdown(item.name)}>
-                        <div className="flex items-center gap-2">
-                            <Icon className="mr-2 h-4 w-4" />
-                            {item.name}
+                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => !isCollapsed && toggleDropdown(item.name)} title={isCollapsed ? item.name : undefined}>
+                        <div className="flex items-center w-full !gap-0">
+                            <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
+                                <Icon className="h-4 w-4" />
+                            </div>
+                            <div className={cn('flex-1 flex items-center justify-between transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                                <span className="ml-2">{item.name}</span>
+                                <ChevronRight className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-90')} />
+                            </div>
                         </div>
-                        <ChevronRight className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-90')} />
                     </Button>
                 ) : (
-                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} asChild>
-                        <Link href={item.href}>
-                            <Icon className="mr-2 h-4 w-4" />
-                            {item.name}
+                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} asChild title={isCollapsed ? item.name : undefined}>
+                        <Link href={item.href} className="flex items-center w-full !gap-0">
+                            <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
+                                <Icon className="h-4 w-4" />
+                            </div>
+                            <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                                <span className="ml-2">{item.name}</span>
+                            </div>
                         </Link>
                     </Button>
                 )}
 
-                {hasSubItems && (
+                {hasSubItems && !isCollapsed && (
                     <div className={cn('overflow-hidden transition-all duration-300 ease-in-out', isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0')}>
                         <div className="space-y-1 pt-1">{item.subItems!.map((subItem) => renderNavigationItem(subItem, level + 1))}</div>
                     </div>
@@ -144,20 +184,26 @@ export function Sidebar({ className }: SidebarProps) {
     }
 
     return (
-        <div className={cn('h-full flex flex-col', className)}>
+        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed}>
             <div className="flex-1 overflow-y-auto scrollbar-hide">
                 <div className="space-y-4 py-4">
                     <div className="px-3 py-2">
                         <div className="space-y-1">
-                            <Link href="/" className="flex items-center space-x-3 px-3 py-2 mb-6">
-                                <div className="h-8 w-8 rounded bg-primary"></div>
-                                <span className="text-lg font-bold text-nowrap">{t('header.brand')}</span>
+                            <Link href="/" className="flex items-center px-3 py-2 mb-6">
+                                <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
+                                    <div className="h-8 w-8 rounded bg-primary"></div>
+                                </div>
+                                <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                                    <span className="ml-2 text-lg font-bold text-nowrap">{t('header.brand')}</span>
+                                </div>
                             </Link>
 
                             {navigation.map((item) => renderNavigationItem(item))}
 
                             <div className="pt-4 mt-4 border-t">
-                                <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t('sidebar.authSection')}</p>
+                                <div className={cn('transition-all duration-300', isCollapsed ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 h-auto')}>
+                                    <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t('sidebar.authSection')}</p>
+                                </div>
                                 {authNavigation.map((item) => renderNavigationItem(item))}
                             </div>
                         </div>

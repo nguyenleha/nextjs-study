@@ -35,7 +35,7 @@ export function SidebarToggle() {
                     if (isOpen) {
                         // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
                         sidebar.style.display = 'flex'
-                        sidebar.style.width = '0'
+                        sidebar.style.width = '5rem' // 80px = 5rem (12+12+32+12+12)
                         sidebar.style.transform = 'translateX(0)'
                         // Force reflow để đảm bảo width được áp dụng trước
                         void sidebar.offsetHeight
@@ -43,17 +43,10 @@ export function SidebarToggle() {
                         mainContent.classList.add('md:pl-64')
                         mainContent.style.paddingLeft = '16rem' // 256px = 16rem
                     } else {
-                        // Sidebar ẩn với hiệu ứng smooth (thu gọn)
-                        sidebar.style.width = '0'
+                        // Sidebar thu gọn chỉ còn icon với hiệu ứng smooth
+                        sidebar.style.width = '5rem' // 80px = 5rem (12+12+32+12+12)
                         mainContent.classList.remove('md:pl-64')
-                        mainContent.style.paddingLeft = '0'
-
-                        // Ẩn sidebar sau khi animation hoàn thành
-                        setTimeout(() => {
-                            if (!isOpen) {
-                                sidebar.style.display = 'none'
-                            }
-                        }, 300) // 300ms = duration của transition
+                        mainContent.style.paddingLeft = '5rem' // 80px = 5rem
                     }
                 }
             }
