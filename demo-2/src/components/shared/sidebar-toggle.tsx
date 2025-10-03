@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Menu, AlignLeft } from 'lucide-react'
 
 export function SidebarToggle() {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     // Effect riêng để xử lý mobile - đảm bảo sidebar luôn đóng trên mobile
     useEffect(() => {

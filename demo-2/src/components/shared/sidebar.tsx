@@ -24,7 +24,8 @@ interface NavigationItem {
 export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname()
     const t = useTranslations('component')
-    const [isCollapsed, setIsCollapsed] = useState(false)
+    const [isCollapsed, setIsCollapsed] = useState(true)
+    const [isHovered, setIsHovered] = useState(false)
 
     // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed
     useEffect(() => {
@@ -141,6 +142,34 @@ export function Sidebar({ className }: SidebarProps) {
 
     const isDropdownOpen = (itemName: string) => openDropdowns.has(itemName)
 
+    // Logic để xác định sidebar có đang expand không
+    // Khi hover vào sidebar, nó sẽ expand thực sự
+    const isExpanded = isHovered || !isCollapsed
+
+    // Effect để xử lý hover expand sidebar
+    useEffect(() => {
+        const sidebar = document.getElementById('desktop-sidebar')
+        const mainContent = document.getElementById('main-content')
+
+        if (sidebar && mainContent) {
+            if (isHovered) {
+                // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
+                sidebar.style.width = '5rem' // 80px = 5rem
+                sidebar.style.transform = 'translateX(0)'
+                // Force reflow để đảm bảo width được áp dụng trước
+                void sidebar.offsetHeight
+                sidebar.style.width = '16rem' // 256px = 16rem
+                mainContent.classList.add('md:pl-64')
+                mainContent.style.paddingLeft = '16rem' // 256px = 16rem
+            } else {
+                // Sidebar thu gọn chỉ còn icon với hiệu ứng smooth
+                sidebar.style.width = '5rem' // 80px = 5rem
+                mainContent.classList.remove('md:pl-64')
+                mainContent.style.paddingLeft = '5rem' // 80px = 5rem
+            }
+        }
+    }, [isHovered])
+
     const renderNavigationItem = (item: NavigationItem, level: number = 0) => {
         const Icon = item.icon
         const isActive = pathname === item.href || (item.subItems && item.subItems.some((subItem) => pathname === subItem.href))
@@ -150,31 +179,31 @@ export function Sidebar({ className }: SidebarProps) {
         return (
             <div key={item.name} className="space-y-1">
                 {hasSubItems ? (
-                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => !isCollapsed && toggleDropdown(item.name)} title={isCollapsed ? item.name : undefined}>
+                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => isExpanded && toggleDropdown(item.name)} title={!isExpanded ? item.name : undefined}>
                         <div className="flex items-center w-full !gap-0">
                             <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
                                 <Icon className="h-4 w-4" />
                             </div>
-                            <div className={cn('flex-1 flex items-center justify-between transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                            <div className={cn('flex-1 flex items-center justify-between transition-all duration-300', !isExpanded ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
                                 <span className="ml-2">{item.name}</span>
                                 <ChevronRight className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-90')} />
                             </div>
                         </div>
                     </Button>
                 ) : (
-                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} asChild title={isCollapsed ? item.name : undefined}>
+                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} asChild title={!isExpanded ? item.name : undefined}>
                         <Link href={item.href} className="flex items-center w-full !gap-0">
                             <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
                                 <Icon className="h-4 w-4" />
                             </div>
-                            <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                            <div className={cn('flex-1 transition-all duration-300', !isExpanded ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
                                 <span className="ml-2">{item.name}</span>
                             </div>
                         </Link>
                     </Button>
                 )}
 
-                {hasSubItems && !isCollapsed && (
+                {hasSubItems && isExpanded && (
                     <div className={cn('overflow-hidden transition-all duration-300 ease-in-out', isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0')}>
                         <div className="space-y-1 pt-1">{item.subItems!.map((subItem) => renderNavigationItem(subItem, level + 1))}</div>
                     </div>
@@ -184,14 +213,14 @@ export function Sidebar({ className }: SidebarProps) {
     }
 
     return (
-        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed}>
+        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             {/* Brand section - cố định ở trên cùng */}
             <div className="flex-shrink-0 px-3 py-4">
                 <Link href="/" className="flex items-center px-3">
                     <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
                         <div className="h-8 w-8 rounded bg-primary"></div>
                     </div>
-                    <div className={cn('flex-1 transition-all duration-300', isCollapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                    <div className={cn('flex-1 transition-all duration-300', !isExpanded ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
                         <span className="ml-2 text-lg font-bold text-nowrap">{t('header.brand')}</span>
                     </div>
                 </Link>
@@ -205,7 +234,7 @@ export function Sidebar({ className }: SidebarProps) {
                             {navigation.map((item) => renderNavigationItem(item))}
 
                             <div className="pt-4 mt-4 border-t">
-                                <div className={cn('transition-all duration-300', isCollapsed ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 h-auto')}>
+                                <div className={cn('transition-all duration-300', !isExpanded ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100 h-auto')}>
                                     <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t('sidebar.authSection')}</p>
                                 </div>
                                 {authNavigation.map((item) => renderNavigationItem(item))}
