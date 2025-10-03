@@ -28,19 +28,31 @@ export function SidebarToggle() {
                     sidebar.classList.add('md:flex')
 
                     // Đảm bảo có transition
-                    sidebar.style.transition = 'transform 0.3s ease-in-out'
+                    sidebar.style.transition = 'all 0.3s ease-in-out'
                     mainContent.style.transition = 'padding-left 0.3s ease-in-out'
 
                     if (isOpen) {
-                        // Sidebar hiển thị
+                        // Sidebar hiển thị với hiệu ứng smooth
+                        sidebar.style.display = 'flex'
+                        // Đặt transform về -100% trước, sau đó animate về 0
+                        sidebar.style.transform = 'translateX(-100%)'
+                        // Force reflow để đảm bảo transform được áp dụng trước
+                        sidebar.offsetHeight
                         sidebar.style.transform = 'translateX(0)'
                         mainContent.classList.add('md:pl-64')
                         mainContent.style.paddingLeft = '16rem' // 256px = 16rem
                     } else {
-                        // Sidebar ẩn với smooth animation
+                        // Sidebar ẩn với hiệu ứng smooth
                         sidebar.style.transform = 'translateX(-100%)'
                         mainContent.classList.remove('md:pl-64')
                         mainContent.style.paddingLeft = '0'
+
+                        // Ẩn sidebar sau khi animation hoàn thành
+                        setTimeout(() => {
+                            if (!isOpen) {
+                                sidebar.style.display = 'none'
+                            }
+                        }, 300) // 300ms = duration của transition
                     }
                 }
             }
