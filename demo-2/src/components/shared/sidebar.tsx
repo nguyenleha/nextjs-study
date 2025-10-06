@@ -4,11 +4,12 @@ import { Link, usePathname } from '@/libs/I18nNavigation'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/libs/utils'
 import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { VisuallyHidden } from '@/components/ui/visually-hidden'
-import { useSidebarConfig } from '@/libs/sidebar-config'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { setMobileOpen, setHovered, setMobile, toggleDropdown, setOpenDropdowns } from '@/store/slices/sidebarSlice'
 import { Home, LayoutDashboard, FormInput, Palette, BarChart3, Settings, Menu, LogIn, UserPlus, ChevronRight, type LucideIcon } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 interface SidebarProps {
     className?: string
@@ -25,49 +26,29 @@ interface NavigationItem {
 export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname()
     const t = useTranslations('component')
-    const { isOpen } = useSidebarConfig()
-    const [isCollapsed, setIsCollapsed] = useState(true)
-    const [isHovered, setIsHovered] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
+    const dispatch = useAppDispatch()
+    const { isDesktopOpen, isMobileOpen, isCollapsed, isHovered, isMobile, openDropdowns } = useAppSelector((state) => state.sidebar)
 
-    // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed và mobile
+    // Lắng nghe sự kiện resize để cập nhật trạng thái mobile
     useEffect(() => {
         const handleResize = () => {
             // Kiểm tra xem có phải mobile không
             const isMobileView = window.innerWidth < 768 // md breakpoint
-            setIsMobile(isMobileView)
-
-            const sidebar = document.getElementById('desktop-sidebar')
-            if (sidebar) {
-                const computedStyle = window.getComputedStyle(sidebar)
-                const width = computedStyle.width
-                const collapsed = width === '80px' || width === '5rem'
-                setIsCollapsed(collapsed)
-            }
+            dispatch(setMobile(isMobileView))
         }
 
-        // Delay để đảm bảo sidebar đã được render
-        const timeoutId = setTimeout(() => {
-            handleResize()
-        }, 100)
+        // Chạy ngay lập tức
+        handleResize()
 
         // Lắng nghe sự kiện resize
         window.addEventListener('resize', handleResize)
 
-        // Lắng nghe sự kiện transitionend để cập nhật trạng thái sau animation
-        const sidebar = document.getElementById('desktop-sidebar')
-        if (sidebar) {
-            sidebar.addEventListener('transitionend', handleResize)
-        }
-
         return () => {
-            clearTimeout(timeoutId)
             window.removeEventListener('resize', handleResize)
-            if (sidebar) {
-                sidebar.removeEventListener('transitionend', handleResize)
-            }
         }
-    }, [])
+    }, [dispatch])
+
+    // Không cần effect này nữa vì logic đã được đơn giản hóa
 
     const navigation: NavigationItem[] = [
         { name: t('header.navigation.home'), href: '/', icon: Home },
@@ -111,16 +92,14 @@ export function Sidebar({ className }: SidebarProps) {
         { name: t('header.navigation.settings'), href: '/settings', icon: Settings },
     ]
 
-    const [openDropdowns, setOpenDropdowns] = useState<Set<string>>(new Set())
-
     // Function để lấy tất cả items có isOpen = true
     const getInitialOpenDropdowns = (items: NavigationItem[]) => {
-        const openItems = new Set<string>()
+        const openItems: string[] = []
 
         const addOpenItems = (itemList: NavigationItem[]) => {
             itemList.forEach((item) => {
                 if (item.subItems && item.isOpen) {
-                    openItems.add(item.name)
+                    openItems.push(item.name)
                 }
                 if (item.subItems) {
                     addOpenItems(item.subItems)
@@ -136,59 +115,21 @@ export function Sidebar({ className }: SidebarProps) {
     useEffect(() => {
         const allItems = [...navigation, ...authNavigation]
         const initialOpenItems = getInitialOpenDropdowns(allItems)
-        setOpenDropdowns(initialOpenItems)
-    }, [])
+        dispatch(setOpenDropdowns(initialOpenItems))
+    }, [dispatch])
 
-    const toggleDropdown = (itemName: string) => {
-        setOpenDropdowns((prev) => {
-            const newSet = new Set(prev)
-            if (newSet.has(itemName)) {
-                newSet.delete(itemName)
-            } else {
-                newSet.add(itemName)
-            }
-            return newSet
-        })
+    const handleToggleDropdown = (itemName: string) => {
+        dispatch(toggleDropdown(itemName))
     }
 
-    const isDropdownOpen = (itemName: string) => openDropdowns.has(itemName)
+    const isDropdownOpen = (itemName: string) => openDropdowns.includes(itemName)
 
     // Logic để xác định sidebar có đang expand không
-    // Trên mobile: chỉ dựa vào isOpen từ config
-    // Trên desktop: ưu tiên isOpen từ config, sau đó là hover, cuối cùng là !isCollapsed
-    const isExpanded = isMobile ? isOpen : isOpen || isHovered || !isCollapsed
+    // Trên mobile: chỉ dựa vào isMobileOpen từ config
+    // Trên desktop: ưu tiên isDesktopOpen từ config, sau đó là hover, cuối cùng là !isCollapsed
+    const isExpanded = isMobile ? isMobileOpen : isDesktopOpen || isHovered || !isCollapsed
 
-    // Effect để xử lý hover expand sidebar và config state
-    useEffect(() => {
-        const sidebar = document.getElementById('desktop-sidebar')
-        const mainContent = document.getElementById('main-content')
-
-        if (sidebar && mainContent) {
-            if (isMobile) {
-                // Trên mobile: reset về trạng thái ban đầu
-                sidebar.style.width = ''
-                sidebar.style.transform = ''
-                mainContent.classList.remove('md:pl-64')
-                mainContent.style.paddingLeft = ''
-            } else {
-                // Trên desktop: áp dụng logic hover và expand
-                if (isOpen || isHovered) { // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
-                    sidebar.style.width = '5rem' // 80px = 5rem
-                    sidebar.style.transform = 'translateX(0)'
-                    // Force reflow để đảm bảo width được áp dụng trước
-                    void sidebar.offsetHeight
-                    sidebar.style.width = '16rem' // 256px = 16rem
-                    mainContent.classList.add('md:pl-64')
-                    mainContent.style.paddingLeft = '16rem' // 256px = 16rem
-                } else {
-                    // Sidebar thu gọn chỉ còn icon với hiệu ứng smooth
-                    sidebar.style.width = '5rem' // 80px = 5rem
-                    mainContent.classList.remove('md:pl-64')
-                    mainContent.style.paddingLeft = '5rem' // 80px = 5rem
-                }
-            }
-        }
-    }, [isHovered, isOpen, isMobile])
+    // Không cần effect này nữa vì chúng ta sẽ sử dụng CSS classes dựa trên Redux state
 
     const renderNavigationItem = (item: NavigationItem, level: number = 0) => {
         const Icon = item.icon
@@ -199,7 +140,7 @@ export function Sidebar({ className }: SidebarProps) {
         return (
             <div key={item.name} className="space-y-1">
                 {hasSubItems ? (
-                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => isExpanded && toggleDropdown(item.name)} title={!isExpanded ? item.name : undefined}>
+                    <Button variant={isActive ? 'secondary' : 'ghost'} className={cn('w-full justify-start !px-3', level > 0 && 'ml-4 w-[calc(100%-1rem)]', isActive && 'bg-secondary')} onClick={() => isExpanded && handleToggleDropdown(item.name)} title={!isExpanded ? item.name : undefined}>
                         <div className="flex items-center w-full !gap-0">
                             <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
                                 <Icon className="h-4 w-4" />
@@ -233,7 +174,7 @@ export function Sidebar({ className }: SidebarProps) {
     }
 
     return (
-        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed} onMouseEnter={() => !isMobile && setIsHovered(true)} onMouseLeave={() => !isMobile && setIsHovered(false)}>
+        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed} onMouseEnter={() => !isMobile && dispatch(setHovered(true))} onMouseLeave={() => !isMobile && dispatch(setHovered(false))}>
             {/* Brand section - cố định ở trên cùng */}
             <div className="flex-shrink-0 px-3 py-4">
                 <Link href="/" className="flex items-center px-3">
@@ -268,10 +209,11 @@ export function Sidebar({ className }: SidebarProps) {
 }
 
 export function MobileSidebar() {
-    const [open, setOpen] = useState(false)
+    const dispatch = useAppDispatch()
+    const { isMobileOpen } = useAppSelector((state) => state.sidebar)
 
     return (
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet open={isMobileOpen} onOpenChange={(open) => dispatch(setMobileOpen(open))}>
             <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="h-5 w-5" />
@@ -281,6 +223,7 @@ export function MobileSidebar() {
             <SheetContent side="left" className="p-0 w-64 h-full">
                 <VisuallyHidden>
                     <SheetTitle>Navigation Menu</SheetTitle>
+                    <SheetDescription>List of navigation links</SheetDescription>
                 </VisuallyHidden>
                 <Sidebar className="h-full" />
             </SheetContent>
