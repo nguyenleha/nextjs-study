@@ -3,7 +3,7 @@
 import { useAppSelector } from '@/store/hooks'
 import { cn } from '@/libs/utils'
 import { Sidebar } from './sidebar'
-import { Header } from './header'
+import { Header } from '@/components/shared'
 
 interface SidebarLayoutProps {
     children: React.ReactNode
@@ -17,27 +17,24 @@ export function SidebarLayout({ children }: SidebarLayoutProps) {
     const isExpanded = !isMobile && (isDesktopOpen || isHovered)
 
     // Tính toán width và padding dựa trên Redux state
-    const sidebarWidth = isMobile ? '0px' : isExpanded ? '16rem' : '5rem'
-    const mainPaddingLeft = isMobile ? '0px' : isExpanded ? '16rem' : '5rem'
+    const sidebarWidth = isMobile ? '0px' : isExpanded ? 'md:w-[16rem]' : 'md:w-[5rem]'
+    const mainPaddingLeft = isMobile ? '0px' : isExpanded ? 'md:pl-[16rem]' : 'md:pl-[5rem]'
 
     return (
         <div className="relative flex min-h-screen">
             {/* Desktop Sidebar */}
-            <div
-                className={cn('md:flex md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out hidden', isMobile && 'hidden')}
-                style={{
-                    width: sidebarWidth,
-                    display: isMobile ? 'none' : 'flex',
-                    transform: 'translateX(0px)',
-                }}
-            >
-                <div className="flex-1 flex flex-col min-h-0 border-r bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-                    <Sidebar />
+            <div className="hidden md:block">
+                <div
+                    className={cn('md:flex md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out hidden translate-x-0 w-0', sidebarWidth)}
+                >
+                    <div className="flex-1 flex flex-col min-h-0 border-r bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+                        <Sidebar />
+                    </div>
                 </div>
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col flex-1 transition-all duration-300 ease-in-out" style={{ paddingLeft: mainPaddingLeft }}>
+            <div className={cn('flex flex-col flex-1 transition-all duration-300 ease-in-out pl-0', mainPaddingLeft)}>
                 <Header />
                 <main className="flex-1 p-4 md:p-6">{children}</main>
             </div>

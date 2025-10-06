@@ -3,11 +3,8 @@
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { ThemeSwitcher } from '@/components/shared/theme-switcher'
+import { ThemeSwitcher, LocaleSwitcher, MobileSidebar, SidebarToggle } from '@/components/shared'
 import { User, LogOut, Settings } from 'lucide-react'
-import { LocaleSwitcher } from '@/components/shared/locale-switcher'
-import { MobileSidebar } from '@/components/shared/sidebar'
-import { SidebarToggle } from '@/components/shared/sidebar-toggle'
 import avatarImage from '@/assets/avatars/avatar-thumb-001.webp'
 
 export function Header() {

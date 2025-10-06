@@ -14,7 +14,7 @@ const initialState: SidebarState = {
     isMobileOpen: false,
     isCollapsed: true,
     isHovered: false,
-    isMobile: true,
+    isMobile: false,
     openDropdowns: [],
 }
 

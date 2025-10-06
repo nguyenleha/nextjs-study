@@ -23,7 +23,7 @@ import {
     // Upload
 } from 'lucide-react'
 import { useState } from 'react'
-import { LocaleSwitcher } from '@/components/shared/locale-switcher'
+import { LocaleSwitcher } from '@/components/shared'
 
 export default function SettingsPage() {
     const [isSaving, setIsSaving] = useState(false)
