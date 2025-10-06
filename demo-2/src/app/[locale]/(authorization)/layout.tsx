@@ -59,14 +59,14 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     return (
         <div className="relative flex min-h-screen">
             {/* Desktop Sidebar - Luôn ẩn trên mobile */}
-            <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out" id="desktop-sidebar">
+            <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 transition-all duration-300 ease-in-out" id="desktop-sidebar" style={{ width: '5rem', display: 'flex', transform: 'translateX(0px)' }}>
                 <div className="flex-1 flex flex-col min-h-0 border-r bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
                     <Sidebar />
                 </div>
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col flex-1 md:pl-64 transition-all duration-300 ease-in-out" id="main-content">
+            <div className="flex flex-col flex-1 md:pl-64 transition-all duration-300 ease-in-out" id="main-content" style={{ paddingLeft: '5rem' }}>
                 <Header />
                 <main className="flex-1 p-4 md:p-6">{children}</main>
             </div>

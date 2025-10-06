@@ -15,25 +15,7 @@ interface SidebarConfigProviderProps {
 }
 
 export function SidebarConfigProvider({ children }: SidebarConfigProviderProps) {
-    const [isOpen, setIsOpen] = useState(true) // Mặc định mở
-    const [isInitialized, setIsInitialized] = useState(false)
-
-    // Lưu trạng thái vào localStorage
-    useEffect(() => {
-        const savedState = localStorage.getItem('sidebar-open')
-        if (savedState !== null) {
-            const parsedState = JSON.parse(savedState)
-            setIsOpen(parsedState)
-        }
-        setIsInitialized(true)
-    }, [])
-
-    // Lưu trạng thái khi thay đổi (chỉ sau khi đã khởi tạo)
-    useEffect(() => {
-        if (isInitialized) {
-            localStorage.setItem('sidebar-open', JSON.stringify(isOpen))
-        }
-    }, [isOpen, isInitialized])
+    const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
         setIsOpen((prev) => !prev)

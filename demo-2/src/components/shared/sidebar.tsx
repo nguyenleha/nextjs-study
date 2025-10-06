@@ -26,12 +26,17 @@ export function Sidebar({ className }: SidebarProps) {
     const pathname = usePathname()
     const t = useTranslations('component')
     const { isOpen } = useSidebarConfig()
-    const [isCollapsed, setIsCollapsed] = useState(false)
+    const [isCollapsed, setIsCollapsed] = useState(true)
     const [isHovered, setIsHovered] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
 
-    // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed
+    // Lắng nghe sự kiện resize để cập nhật trạng thái collapsed và mobile
     useEffect(() => {
         const handleResize = () => {
+            // Kiểm tra xem có phải mobile không
+            const isMobileView = window.innerWidth < 768 // md breakpoint
+            setIsMobile(isMobileView)
+
             const sidebar = document.getElementById('desktop-sidebar')
             if (sidebar) {
                 const computedStyle = window.getComputedStyle(sidebar)
@@ -149,8 +154,9 @@ export function Sidebar({ className }: SidebarProps) {
     const isDropdownOpen = (itemName: string) => openDropdowns.has(itemName)
 
     // Logic để xác định sidebar có đang expand không
-    // Ưu tiên isOpen từ config, sau đó là hover, cuối cùng là !isCollapsed
-    const isExpanded = isOpen || isHovered || !isCollapsed
+    // Trên mobile: chỉ dựa vào isOpen từ config
+    // Trên desktop: ưu tiên isOpen từ config, sau đó là hover, cuối cùng là !isCollapsed
+    const isExpanded = isMobile ? isOpen : isOpen || isHovered || !isCollapsed
 
     // Effect để xử lý hover expand sidebar và config state
     useEffect(() => {
@@ -158,23 +164,31 @@ export function Sidebar({ className }: SidebarProps) {
         const mainContent = document.getElementById('main-content')
 
         if (sidebar && mainContent) {
-            if (isOpen || isHovered) {
-                // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
-                sidebar.style.width = '5rem' // 80px = 5rem
-                sidebar.style.transform = 'translateX(0)'
-                // Force reflow để đảm bảo width được áp dụng trước
-                void sidebar.offsetHeight
-                sidebar.style.width = '16rem' // 256px = 16rem
-                mainContent.classList.add('md:pl-64')
-                mainContent.style.paddingLeft = '16rem' // 256px = 16rem
-            } else {
-                // Sidebar thu gọn chỉ còn icon với hiệu ứng smooth
-                sidebar.style.width = '5rem' // 80px = 5rem
+            if (isMobile) {
+                // Trên mobile: reset về trạng thái ban đầu
+                sidebar.style.width = ''
+                sidebar.style.transform = ''
                 mainContent.classList.remove('md:pl-64')
-                mainContent.style.paddingLeft = '5rem' // 80px = 5rem
+                mainContent.style.paddingLeft = ''
+            } else {
+                // Trên desktop: áp dụng logic hover và expand
+                if (isOpen || isHovered) { // Sidebar hiển thị với hiệu ứng smooth (mở rộng)
+                    sidebar.style.width = '5rem' // 80px = 5rem
+                    sidebar.style.transform = 'translateX(0)'
+                    // Force reflow để đảm bảo width được áp dụng trước
+                    void sidebar.offsetHeight
+                    sidebar.style.width = '16rem' // 256px = 16rem
+                    mainContent.classList.add('md:pl-64')
+                    mainContent.style.paddingLeft = '16rem' // 256px = 16rem
+                } else {
+                    // Sidebar thu gọn chỉ còn icon với hiệu ứng smooth
+                    sidebar.style.width = '5rem' // 80px = 5rem
+                    mainContent.classList.remove('md:pl-64')
+                    mainContent.style.paddingLeft = '5rem' // 80px = 5rem
+                }
             }
         }
-    }, [isHovered, isOpen])
+    }, [isHovered, isOpen, isMobile])
 
     const renderNavigationItem = (item: NavigationItem, level: number = 0) => {
         const Icon = item.icon
@@ -219,7 +233,7 @@ export function Sidebar({ className }: SidebarProps) {
     }
 
     return (
-        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <div className={cn('h-full flex flex-col', className)} data-collapsed={isCollapsed} onMouseEnter={() => !isMobile && setIsHovered(true)} onMouseLeave={() => !isMobile && setIsHovered(false)}>
             {/* Brand section - cố định ở trên cùng */}
             <div className="flex-shrink-0 px-3 py-4">
                 <Link href="/" className="flex items-center px-3">
