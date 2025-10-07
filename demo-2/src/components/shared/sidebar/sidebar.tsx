@@ -249,26 +249,26 @@ export function Sidebar({ className }: SidebarProps) {
 
                 {/* Hover Menu */}
                 {isUserMenuOpen && (
-                <div className="absolute bottom-[calc(100%_-_10px)] left-3 right-3 bg-popover border rounded-md shadow-lg z-50" onMouseEnter={handleUserMenuEnter} onMouseLeave={handleUserMenuLeave}>
-                    <div className="p-2">
-                        <div className="px-2 py-1.5 text-sm font-medium">Admin User</div>
-                        <div className="px-2 pb-2 text-xs text-muted-foreground">admin@example.com</div>
-                        <div className="border-t my-1"></div>
-                        <Link href="/profile" className="flex items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
-                            <User className="mr-2 h-4 w-4" />
-                            Profile
-                        </Link>
-                        <Link href="/settings" className="flex items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
-                            <Settings className="mr-2 h-4 w-4" />
-                            Settings
-                        </Link>
-                        <div className="border-t my-1"></div>
-                        <button className="flex items-center w-full px-2 py-1.5 text-sm hover:bg-accent rounded-sm text-left">
-                            <LogOut className="mr-2 h-4 w-4" />
-                            Log out
-                        </button>
+                    <div className="absolute bottom-[calc(100%_-_10px)] left-3 right-3 bg-popover border rounded-md shadow-lg z-50" onMouseEnter={handleUserMenuEnter} onMouseLeave={handleUserMenuLeave}>
+                        <div className="p-2 text-nowrap overflow-hidden">
+                            <div className="px-2 py-1.5 text-sm font-medium">Admin User</div>
+                            <div className="px-2 pb-2 text-xs text-muted-foreground">admin@example.com</div>
+                            <div className="border-t my-1"></div>
+                            <Link href="/profile" className="flex flex-nowrap items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
+                                <User className="mr-2 min-w-4 min-h-4 h-4 w-4" />
+                                {t('sidebar.profile')}
+                            </Link>
+                            <Link href="/settings" className="flex flex-nowrap items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
+                                <Settings className="mr-2 min-w-4 min-h-4 h-4 w-4" />
+                                {t('sidebar.settings')}
+                            </Link>
+                            <div className="border-t my-1"></div>
+                            <button className="flex flex-nowrap items-center w-full px-2 py-1.5 text-sm hover:bg-accent rounded-sm text-left">
+                                <LogOut className="mr-2 min-w-4 min-h-4 h-4 w-4" />
+                                {t('sidebar.logout')}
+                            </button>
+                        </div>
                     </div>
-                </div>
                 )}
             </div>
         </div>

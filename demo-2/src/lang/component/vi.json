@@ -28,7 +28,10 @@
         }
     },
     "sidebar": {
-        "authSection": "Xác Thực",
+        "historySection": "Lịch Sử",
+        "profile": "Hồ Sơ",
+        "settings": "Cài Đặt",
+        "logout": "Đăng Xuất",
         "signIn": "Đăng Nhập",
         "signUp": "Đăng Ký"
     }

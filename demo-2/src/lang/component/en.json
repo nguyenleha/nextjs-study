@@ -28,7 +28,10 @@
         }
     },
     "sidebar": {
-        "authSection": "Authentication",
+        "historySection": "History",
+        "profile": "Profile",
+        "settings": "Settings",
+        "logout": "Logout",
         "signIn": "Sign In",
         "signUp": "Sign Up"
     }
