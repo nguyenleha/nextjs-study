@@ -8,8 +8,8 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from 
 import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { setMobileOpen, setHovered, setMobile, toggleDropdown, setOpenDropdowns } from '@/store/slices/sidebarSlice'
-import { Home, LayoutDashboard, FormInput, Palette, BarChart3, Settings, Menu, LogIn, UserPlus, ChevronRight, type LucideIcon } from 'lucide-react'
-import { useEffect } from 'react'
+import { Home, LayoutDashboard, FormInput, Palette, BarChart3, Settings, Menu, LogIn, UserPlus, ChevronRight, User, LogOut, type LucideIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 interface SidebarProps {
     className?: string
@@ -28,6 +28,8 @@ export function Sidebar({ className }: SidebarProps) {
     const t = useTranslations('component')
     const dispatch = useAppDispatch()
     const { isDesktopOpen, isMobileOpen, isCollapsed, isHovered, isMobile, openDropdowns } = useAppSelector((state) => state.sidebar)
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+    const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
 
     // Lắng nghe sự kiện resize để cập nhật trạng thái mobile
     useEffect(() => {
@@ -47,6 +49,15 @@ export function Sidebar({ className }: SidebarProps) {
             window.removeEventListener('resize', handleResize)
         }
     }, [dispatch])
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout)
+            }
+        }
+    }, [hoverTimeout])
 
     // Không cần effect này nữa vì logic đã được đơn giản hóa
 
@@ -123,6 +134,21 @@ export function Sidebar({ className }: SidebarProps) {
     }
 
     const isDropdownOpen = (itemName: string) => openDropdowns.includes(itemName)
+
+    const handleUserMenuEnter = () => {
+        if (hoverTimeout) {
+            clearTimeout(hoverTimeout)
+            setHoverTimeout(null)
+        }
+        setIsUserMenuOpen(true)
+    }
+
+    const handleUserMenuLeave = () => {
+        const timeout = setTimeout(() => {
+            setIsUserMenuOpen(false)
+        }, 150) // Delay 150ms
+        setHoverTimeout(timeout)
+    }
 
     // Logic để xác định sidebar có đang expand không
     // Trên mobile: chỉ dựa vào isMobileOpen từ config
@@ -203,6 +229,47 @@ export function Sidebar({ className }: SidebarProps) {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* User info section - cố định ở dưới cùng */}
+            <div className="mt-auto flex-shrink-0 px-3 py-4 border-t relative">
+                <div className="flex items-center px-3 py-2 rounded-md hover:bg-accent cursor-pointer transition-colors" onMouseEnter={handleUserMenuEnter} onMouseLeave={handleUserMenuLeave}>
+                    <div className="h-8 flex items-center justify-center flex-shrink-0 transition-none w-8 data-[collapsed=true]:w-full">
+                        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <span className="text-white text-sm font-bold">AD</span>
+                        </div>
+                    </div>
+                    <div className={cn('flex-1 transition-all duration-300', !isExpanded ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100')}>
+                        <div className="ml-2 text-left">
+                            <p className="text-sm font-medium text-nowrap">Admin User</p>
+                            <p className="text-xs text-muted-foreground text-nowrap">admin@example.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Hover Menu */}
+                {isUserMenuOpen && (
+                <div className="absolute bottom-[calc(100%_-_10px)] left-3 right-3 bg-popover border rounded-md shadow-lg z-50" onMouseEnter={handleUserMenuEnter} onMouseLeave={handleUserMenuLeave}>
+                    <div className="p-2">
+                        <div className="px-2 py-1.5 text-sm font-medium">Admin User</div>
+                        <div className="px-2 pb-2 text-xs text-muted-foreground">admin@example.com</div>
+                        <div className="border-t my-1"></div>
+                        <Link href="/profile" className="flex items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
+                            <User className="mr-2 h-4 w-4" />
+                            Profile
+                        </Link>
+                        <Link href="/settings" className="flex items-center px-2 py-1.5 text-sm hover:bg-accent rounded-sm">
+                            <Settings className="mr-2 h-4 w-4" />
+                            Settings
+                        </Link>
+                        <div className="border-t my-1"></div>
+                        <button className="flex items-center w-full px-2 py-1.5 text-sm hover:bg-accent rounded-sm text-left">
+                            <LogOut className="mr-2 h-4 w-4" />
+                            Log out
+                        </button>
+                    </div>
+                </div>
+                )}
             </div>
         </div>
     )
