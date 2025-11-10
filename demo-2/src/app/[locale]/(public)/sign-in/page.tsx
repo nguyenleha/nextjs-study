@@ -21,6 +21,7 @@ const createSignInSchema = (t: (key: string) => string) =>
 export default function SignInPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isCustomLoading, setIsCustomLoading] = useState(false)
     const t = useTranslations('auth')
 
     const signInSchema = createSignInSchema(t)
@@ -45,6 +46,20 @@ export default function SignInPage() {
             console.error('Sign in error:', error)
         } finally {
             setIsLoading(false)
+        }
+    }
+
+    const handleCustomButtonClick = async () => {
+        setIsCustomLoading(true)
+        try {
+            // Simulate custom action
+            await new Promise((resolve) => setTimeout(resolve, 1500))
+            console.log('Custom button clicked - performing custom action')
+            // Handle custom action
+        } catch (error) {
+            console.error('Custom action error:', error)
+        } finally {
+            setIsCustomLoading(false)
         }
     }
 
@@ -81,6 +96,12 @@ export default function SignInPage() {
                         {isLoading ? t('signIn.submittingButton') : t('signIn.submitButton')}
                     </Button>
                 </form>
+
+                <div className="mt-4">
+                    <Button type="button" variant="outline" className="w-full" onClick={handleCustomButtonClick} disabled={isCustomLoading}>
+                        {isCustomLoading ? 'Đang xử lý...' : 'Nút tùy chỉnh'}
+                    </Button>
+                </div>
             </CardContent>
             <CardFooter className="flex flex-col space-y-2">
                 <div className="text-sm text-center text-muted-foreground">
